@@ -8,7 +8,7 @@
 </head>
 <body>
     <form method="POST">
-        <input type="number" name="a"><br>
+        <input type="number" name="a" required><br>
         <input type="submit">
     </form>
 <?php

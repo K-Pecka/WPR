@@ -8,14 +8,14 @@
 </head>
 <body>
     <form method="POST">
-        <input type="text" name="a"><br>
+        <input type="text" name="a" required><br>
         <input type="submit">
     </form>
 <?php
     if(isset($_POST['a']))
     {
         $text = explode(" ",$_POST['a']);
-        echo "%".$text[1]." ".$text[0]."%$#";
+        echo $_POST['a'] != "" && $text[1] != "" && count($text) == 2 ? "%".$text[1]." ".$text[0]."%$#"  : "BŁĄD";
     }
 ?>
 </body>

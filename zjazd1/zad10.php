@@ -16,19 +16,23 @@
     <?php
     if (isset($_POST['a'])) {
         echo "<pre>";
-        $a = is_numeric($_POST['a']) ? $_POST['a'] : 1;
-        for ($i = 0; $i <= $a; $i++) {
-            echo str_repeat("*", $i) . "<br>";
+        $a = is_numeric($_POST['a']) && $_POST['a']>0? $_POST['a'] : null;
+        if($a != null)
+        {
+            for ($i = 0; $i <= $a; $i++) {
+                echo str_repeat("*", $i) . "<br>";
+            }
+            for ($i = $a; $i > 0; $i--) {
+                echo str_repeat("*", $i) . "<br>";
+            }
+            for ($i = 0; $i < $a; $i++) {
+                echo str_repeat("&nbsp;", $i) . str_repeat("*", $a - $i) . "<br>";
+            }
+            for ($i = $a - 1; $i >= 0; $i--) {
+                echo str_repeat("&nbsp;", $i) . str_repeat("*", $a - $i) . "<br>";
+            }
         }
-        for ($i = $a; $i > 0; $i--) {
-            echo str_repeat("*", $i) . "<br>";
-        }
-        for ($i = 0; $i < $a; $i++) {
-            echo str_repeat("&nbsp;", $i) . str_repeat("*", $a - $i) . "<br>";
-        }
-        for ($i = $a - 1; $i >= 0; $i--) {
-            echo str_repeat("&nbsp;", $i) . str_repeat("*", $a - $i) . "<br>";
-        }
+
         echo "</pre>";
     }
     ?>

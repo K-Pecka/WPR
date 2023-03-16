@@ -10,28 +10,35 @@
 
 <body>
     <form method="POST">
-        <input type="number" name="a"><br>
-        <input type="number" name="b"><br>
-        <input type="number" name="c"><br>
+        <input type="number" name="a" required><br>
+        <input type="number" name="b" required><br>
+        <input type="number" name="c" required><br>
         <input type="submit">
     </form>
     <?php
     if (isset($_POST['a']) && isset($_POST['b']) && isset($_POST['c'])) {
-        $a = is_numeric($_POST['a']) ? $_POST['a'] : 1;
-        $b = is_numeric($_POST['b']) ? $_POST['b'] : 1;
-        $c = is_numeric($_POST['c']) ? $_POST['c'] : 1;
+        $a = is_numeric($_POST['a']) ? $_POST['a'] : null;
+        $b = is_numeric($_POST['b']) ? $_POST['b'] : null;
+        $c = is_numeric($_POST['c']) ? $_POST['c'] : null;
         echo "<br>";
+        if($a == null || $b == null || $c == null)
+        {
+            echo "BŁĄD";
+        }else
         if ($a >= $b && $a >= $c) {
-            echo $a . " ≥ ";
-            echo $b >= $c ? $b . " ≥ " . $c : $c . " ≥ " . $b;
+            echo $b >= $c ? $a . " ≥ ".$b . " ≥ " . $c : $a . " ≥ ".$c . " ≥ " . $b;
+            echo "<br>";
+            echo $b >= $c ? $c . " ≤ ".$b . " ≤ " . $a : $b . " ≤ ".$c . " ≤ " . $a;
         } else
         if ($b >= $c && $b >= $a) {
-            echo $b . " ≥ ";
-            echo $a >= $c ? $a . " ≥ " . $c : $c . " ≥ " . $a;
+            echo $a >= $c ? $b . " ≥ ".$a . " ≥ " . $c : $b . " ≥ ".$c . " ≥ " . $a;
+            echo "<br>";
+            echo $a >= $c ? $c . " ≤ ".$a . " ≤ " . $b : $a . " ≤ ".$c . " ≤ " . $b;
         } else
         if ($c >= $b && $c >= $a) {
-            echo $c . " ≥ ";
-            echo $b >= $a ? $b . " ≥ " . $a : $a . " ≥ " . $b;
+            echo $b >= $a ? $c . " ≥ ".$b . " ≥ ".$a : $c." ≥ ".$a . " ≥ " . $b;
+            echo "<br>";
+            echo $b >= $a ? $a . " ≤ ".$b . " ≤ ".$c : $b." ≤ ".$a . " ≤ " . $c;
         }
     }
     ?>

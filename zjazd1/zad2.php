@@ -10,14 +10,14 @@
 
 <body>
     <form method="POST">
-        <input type="number" name="a"><br>
-        <input type="number" name="b"><br>
+        <input type="number" name="a" required><br>
+        <input type="number" name="b" required><br>
         <input type="submit">
     </form>
     <?php
     if (isset($_POST['a']) && isset($_POST['b'])) {
-        $a = is_numeric($_POST['a']) ? $_POST['a'] : 1;
-        $b = is_numeric($_POST['b']) ? $_POST['b'] : 1;
+        $a = is_numeric($_POST['a']) && $_POST['a']>0 ? $_POST['a'] : 1;
+        $b = is_numeric($_POST['b']) && $_POST['a']>0 ? $_POST['b'] : 1;
         echo "<br>P = " . $a . " * " . $b . " = " . $a * $b;
     }
     ?>

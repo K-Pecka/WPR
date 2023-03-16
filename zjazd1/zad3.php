@@ -8,14 +8,14 @@
 </head>
 <body>
     <form method="POST">
-        <input type="number" name="a"><br>
+        <input type="number" name="a" required><br>
         <input type="submit">
     </form>
 <?php
     if(isset($_POST['a']))
     {
         $a=is_numeric($_POST['a']) ? $_POST['a'] : 1;
-        echo sqrt($a);
+        echo round(sqrt($a),2);
     }
 ?>
 </body>
