@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <form method="POST">
-        <input type="text" name="a" required><br>
+        <label>
+            Wprowadź tekst:<input type="text" name="a" required>
+        </label>
+        <br>
         <input type="submit">
     </form>
-<?php
-    if(isset($_POST['a']))
-    {
-        $text = explode(" ",$_POST['a']);
-        echo $_POST['a'] != "" && $text[1] != "" && count($text) == 2 ? "%".$text[1]." ".$text[0]."%$#"  : "BŁĄD";
+    <?php
+    if (isset($_POST['a'])) {
+        $text = $_POST['a'] != "" ? $_POST['a'] : null;
+        if ($text) {
+            $arr = array_reverse(explode(" ", $text));
+            echo "%" . trim(implode(" ", $arr)) . "%$#";
+        }
     }
-?>
+    ?>
 </body>
+
 </html>
