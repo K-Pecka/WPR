@@ -8,7 +8,7 @@
 
 <body>
     <form>
-        <input name="a" type="number" step="1" required>
+        <input name="a" type="number" step="1" min="1" required>
         <input type="submit">
     </form>
     <br><br>
