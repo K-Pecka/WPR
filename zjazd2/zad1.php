@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple calculator</title>
+    <style>
+        .error {
+            color: rgb(200, 0, 0);
+        }
+    </style>
 </head>
 
 <body>
@@ -24,23 +29,30 @@
     function calculate($a, $b, $type)
     {
         $result = 0;
-        switch ($type) {
-            case '+':
-                $result = $a + $b;
-                break;
-            case '-':
-                $result = $a - $b;
-                break;
-            case '*':
-                $result = $a * $b;
-                break;
-            case '/':
-                $result = $b == 0 ? null : $a / $b;
-                break;
+        try {
+            switch ($type) {
+                case '+':
+                    $result = $a + $b;
+                    break;
+                case '-':
+                    $result = $a - $b;
+                    break;
+                case '*':
+                    $result = $a * $b;
+                    break;
+                case '/':
+                    if ($b == 0) {
+                        throw new Exception("You can't divide by zero!");
+                    }
+                    $result = $a / $b;
+                    break;
+            }
+            $a = $a < 0 ? "($a)" : $a;
+            $b = $b < 0 ? "($b)" : $b;
+            return $a . " " . $type . " " . $b . " = " . $result;
+        } catch (Exception $e) {
+            echo "<span class='error'>" . $e->getMessage() . "</span>";
         }
-        $a = $a<0 ? "($a)" : $a;
-        $b = $b<0 ? "($b)" : $b;
-        return $result == null && $result != 0 ? "ERROR, trying to divide by zero!" : $a . " " . $type . " " . $b . " = " . $result;
     }
     if (isset($_GET['a'])) {
         $a = is_numeric($_GET['a']) ? $_GET['a'] : null;

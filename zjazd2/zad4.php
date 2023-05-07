@@ -48,7 +48,7 @@
         }
     }
     if (isset($_GET['a'])) {
-        $a = is_numeric($_GET['a']) && $_GET['a'] > 0 ? $_GET['a'] : null;
+        $a = is_numeric($_GET['a']) && $_GET['a'] > 0 && (int)$_GET['a'] == $_GET['a'] ? $_GET['a'] : null;
         if ($a != null) {
             $prime = new Prime();
             $prime->isPrimeNumber($a);
