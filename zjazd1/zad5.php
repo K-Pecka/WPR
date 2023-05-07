@@ -20,6 +20,8 @@
         if ($text) {
             $arr = array_reverse(explode(" ", $text));
             echo "%" . trim(implode(" ", $arr)) . "%$#";
+        } else {
+            echo "Input is empty!";
         }
     }
     ?>

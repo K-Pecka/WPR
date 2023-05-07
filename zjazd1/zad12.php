@@ -4,6 +4,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style>
+		.grid {
+			display: grid;
+			width: 15%;
+		}
+
+		.grid>div {
+			border: 1px solid black;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -47,20 +60,28 @@
 	}
 	if (isset($_POST['tab'])) {
 		$arr = $_POST['tab'];
+		$style = "style='
+		grid-template-columns: repeat(" . $_SESSION['cols'] . ", 1fr);
+		grid-template-rows: repeat(" . $_SESSION['rows'] . ", 1fr);
+		width:" . ($_SESSION['cols'] * 50) . "px;
+		height:" . ($_SESSION['rows'] * 50) . "px;
+		'";
 		echo "<h2>MACIERZ</h2>";
+		echo "<div class='grid' $style>";
 		for ($i = 0; $i < $_SESSION['rows']; $i++) {
 			for ($j = 0; $j < $_SESSION['cols']; $j++) {
-				echo $arr[$i][$j] . " ";
+				echo "<div>" . $arr[$i][$j] . "</div>";
 			}
-			echo "<br>";
 		}
+		echo "</div>";
 		echo "<h2>TRANSPOZYCJA</h2>";
+		echo "<div class='grid' $style>";
 		for ($i = 0; $i < $_SESSION['cols']; $i++) {
 			for ($j = 0; $j < $_SESSION['rows']; $j++) {
-				echo $arr[$j][$i] . " ";
+				echo "<div>" . $arr[$j][$i] . "</div>";
 			}
-			echo "<br>";
 		}
+		echo "</div>";
 	}
 	?>
 </body>

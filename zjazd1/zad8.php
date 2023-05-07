@@ -44,6 +44,8 @@
                 echo "<br>";
                 echo $a > $b ? $c . " ≥ " . $a . " ≥ " . $b : $c . " ≥ " . $b . " ≥ " . $a;
             }
+        } else {
+            echo "The entered data is incorrect!";
         }
     }
     ?>

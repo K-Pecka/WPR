@@ -16,7 +16,7 @@
     <?php
     if (isset($_POST['a'])) {
 
-        $a = is_numeric($_POST['a']) ? $_POST['a'] : null;
+        $a = is_numeric($_POST['a']) && $_POST['a'] > 0 ? $_POST['a'] : null;
         if ($a) {
             echo "<pre>";
             for ($i = 0; $i <= $a; $i++) {

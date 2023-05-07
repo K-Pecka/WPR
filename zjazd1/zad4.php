@@ -22,7 +22,7 @@
     if (isset($_POST['a']) && isset($_POST['b'])) {
         $a = is_numeric($_POST['a']) ? $_POST['a'] : null;
         $b = is_numeric($_POST['b']) ? $_POST['b'] : null;
-        if ($a == null || $b == null) {
+        if ($a != null && $b != null) {
             echo
             "<br>" . $a . " + " . $b . " = " . ($a + $b) .
                 "<br>" . $a . " - " . $b . " = " . ($a - $b) .
