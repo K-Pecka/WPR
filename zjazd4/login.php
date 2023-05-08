@@ -10,6 +10,7 @@ if (isset($_SESSION['message'])) {
 }
 if (isset($_POST['login']) && isset($_POST['pass'])) {
     if ($_POST['login'] == "admin" && $_POST['pass'] == "pass") {
+        setcookie('login',$_POST['login'],time()+3600);
         $_SESSION['login'] = $_POST['login'];
         $_SESSION['pass'] = $_POST['pass'];
     } else {
