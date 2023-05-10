@@ -1,7 +1,5 @@
 <?php
 
-use PhpMyAdmin\Header;
-
 session_start();
 $path = "form.php";
 if (isset($_POST['logOut'])) {

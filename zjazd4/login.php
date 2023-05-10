@@ -1,7 +1,5 @@
 <?php
 
-use PhpMyAdmin\Header;
-
 session_start();
 $path = "login.php";
 $message = isset($_SESSION['message']) ? $_SESSION['message'] : "";
