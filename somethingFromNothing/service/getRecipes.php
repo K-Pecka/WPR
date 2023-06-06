@@ -17,7 +17,5 @@ try {
     header('Content-Type: application/json');
     echo $json;
 } catch (PDOException $e) {
-    // Obsługa błędów
-    echo "{}";
-    //echo "Błąd połączenia z bazą danych: " . $e->getMessage();
+    echo json_encode(['error' => 'Database connection error: ' . $e->getMessage()]);
 }

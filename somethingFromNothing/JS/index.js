@@ -26,7 +26,6 @@ var displayRecipe=(el)=>
     window.location.href = data.path.display+"?id_recipe="+el.dataset.id;
   })
   .catch(error => {
-    // Obsługa błędu, jeśli wystąpił
     console.error('Błąd pobierania pliku JSON:', error);
   });
   
@@ -35,11 +34,7 @@ var getRecipes = () =>{
   fetch('./service/getRecipes.php')
   .then(response => response.json())
   .then(data => {
-        // Pobierz szablon z dokumentu
     var templateSource = document.getElementById("recipe-template").innerHTML;
-    
-    // Skompiluj szablon
-    
     if(typeof Handlebars == 'undefined')
     {
        document.querySelector("#recipes").innerHTML = "Błąd Servera 500";
@@ -55,14 +50,12 @@ var getRecipes = () =>{
     data.forEach(function(recipe) {
       html += template(recipe);
     });
-    // Dodaj wygenerowany HTML do dokumentu
     document.querySelector("#recipes").innerHTML += html;
     document.querySelectorAll('.recipe').forEach((el)=>{
       el.addEventListener('click',()=>displayRecipe(el));
     })
   })
   .catch(error => {
-    // Obsługa błędów
     console.error('Błąd pobierania danych:', error);
   });
 }
@@ -80,13 +73,11 @@ var getRecipesForId = (id) =>{
     var recipeTemplateSource = document.getElementById("recipe-template").innerHTML;
     var recipeTemplate = Handlebars.compile(recipeTemplateSource);
 
-    // Renderowanie danych przepisu na stronie
     var recipeContainer = document.getElementById("recipe");
     var recipeHTML = recipeTemplate(data);
     recipeContainer.innerHTML = recipeHTML;
   })
   .catch(error => {
-    // Obsługa błędów
     console.error('Błąd pobierania danych:', error);
   });
 }
@@ -121,7 +112,6 @@ window.addEventListener('load',getData);
 
 const toggleCheckbox = document.querySelector('.toggle-checkbox');
 
-// Sprawdzenie stanu zapisanego w localStorage przy ładowaniu strony
 window.addEventListener('load', function() {
   const darkModeEnabled = localStorage.getItem('darkModeEnabled');
 
@@ -131,7 +121,6 @@ window.addEventListener('load', function() {
   }
 });
 
-// Obsługa zmiany stanu suwaka
 toggleCheckbox.addEventListener('change', function() {
   if (this.checked) {
     localStorage.setItem('darkModeEnabled', 'true');
@@ -149,24 +138,22 @@ var closeBtn = document.getElementsByClassName('close')[0];
 var description = document.querySelector('.addToAdd');
 
 
-// Funkcja otwierająca moduł
 function openModal() {
     setTimeout(function () {
       modal.style.display = 'block';
     }, 300);
   }
 
-// Funkcja zamykająca moduł
+
 function closeModal() {
   setTimeout(function () {
     modal.style.display = 'none';
   }, 300);
 }
 
-// Nasłuchiwanie kliknięcia przycisku otwierającego moduł
+
 //openBtn.addEventListener('click', openModal);
 
-// Nasłuchiwanie kliknięcia przycisku zamykającego moduł
 /*closeBtn.addEventListener('click', closeModal);
 
 description.addEventListener('click',()=>{
@@ -201,10 +188,9 @@ setTimeout(function () {
 }, 300);
 }
 
-// Nasłuchiwanie kliknięcia przycisku otwierającego moduł
+
 openBtnI.addEventListener('click', openModalI);
 
-// Nasłuchiwanie kliknięcia przycisku zamykającego moduł
 closeBtnI.addEventListener('click', closeModalI);
 
 descriptionI.addEventListener('click',()=>{
@@ -240,7 +226,6 @@ var getIngridient = () =>{
     var recipeTemplateSource = document.getElementById("ingredient-template").innerHTML;
     var recipeTemplate = Handlebars.compile(recipeTemplateSource);
     console.log(data);
-    // Renderowanie danych przepisu na stronie
     var recipeContainer = document.getElementById("addIng");
     var html ="";
     data.forEach(el=>{
@@ -250,7 +235,6 @@ var getIngridient = () =>{
     recipeContainer.innerHTML += html;
   })
   .catch(error => {
-    // Obsługa błędów
     console.error('Błąd pobierania danych:', error);
   });
 }
