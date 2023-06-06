@@ -1,0 +1,139 @@
+nav {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: top 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f1f1f1;
+    padding: 10px;
+    width: 100vw;
+    z-index: 10;
+  }
+  
+  nav.hiden {
+    top: -100px;
+  }
+  nav li
+  {
+	display: flex;
+	align-items: center;
+  }
+  #baner {
+	display: flex;
+	align-items: center;
+  }
+  
+  #baner img {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+  }
+  
+  #baner #title {
+	font-size: 18px;
+	font-weight: bold;
+  }
+  
+  #menu-toggle {
+	display: none;
+  }
+  
+  #menu-toggle label {
+	font-size: 24px;
+	cursor: pointer;
+  }
+  
+  #menu-checkbox {
+	display: none;
+  }
+  
+  #menu-items {
+	display: flex;
+  margin-right: 1vw;
+  }
+  
+  #menu-items li {
+	margin-right: 20px;
+  }
+  
+  #menu-items li:last-child {
+	margin-right: 0;
+  }
+  
+  #menu-items li img {
+	width: 2em;
+	height: 2em;
+	margin-right: 5px;
+  }
+  
+  #menu-items li input[type="text"] {
+	padding: 5px;
+	height: 2em;
+	width: 300px;
+	border-radius: 5px;
+	border: none;
+  }
+  
+  #menu-items li button {
+	padding: 5px 10px;
+	background-color: #4caf50;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  body.dark-mode input,body.dark-mode input::placeholder
+  {
+    background-color: #aeaeae;
+    color:rgb(219, 219, 219);
+  }
+
+  .slider-container {
+    position: relative;
+    width: 80px;
+    height: 40px;
+    margin-right: 1vw;
+  }
+  
+  .toggle-checkbox {
+    display: none;
+  }
+  
+  .toggle-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ccc;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label {
+    background-color: #454c52;
+  }
+  body.dark-mode .toggle-label:before {
+    background-color: #a3a3a3;
+  }
+
+  .toggle-label:before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 32px;
+    height: 32px;
+    background-color: rgb(240, 225, 26);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  .toggle-checkbox:checked + .toggle-label:before {
+    transform: translateX(40px);
+  }

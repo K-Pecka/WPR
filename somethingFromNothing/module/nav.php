@@ -1,0 +1,25 @@
+<?php
+$nav =
+  '<nav id="main-nav">
+    <div id="baner">
+      <img src="{{BANER_IMG}}" alt="baner.jpg" class="icon">
+      <div id="title">{{TITLE}}</div>
+    </div>
+    <div id="menu-toggle">
+      <input type="checkbox" id="menu-checkbox">
+      <label for="menu-checkbox">&#9776;</label>
+    </div>
+    <ol id="menu-items">
+      <li>{{ADD_RECIPE}}</li>
+      <li>
+        <label for="label"><img src="../image/icon/lupe.png" class="icon"></label>
+        <input type="text" placeholder="Wciśnij Enter, aby odnaleźć przepis lub #, aby pokazać wszystkie przepisy" id="label">
+        <button>SZUKAJ</button>
+      </li>
+    </ol>
+    <div class="slider-container">
+      <input type="checkbox" id="toggle" class="toggle-checkbox">
+      <label for="toggle" class="toggle-label"></label>
+    </div>
+  </nav>';
+$nav = str_replace("{{TITLE}}", $config->title, $nav);

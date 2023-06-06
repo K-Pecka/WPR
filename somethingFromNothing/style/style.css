@@ -1,0 +1,281 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+:root {
+  --background-color-light: #ffffff;
+  --text-color-light: #000000;
+  
+  --background-color-dark: #1f1f1f;
+  --text-color-dark: #ffffff;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+
+body.dark-mode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+body.dark-mode .recipe{
+  background-color: #333;
+}
+nav,
+footer,
+header{
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+body.dark-mode nav,
+body.dark-mode footer,
+body.dark-mode header,
+body.dark-mode h1
+{
+  background-color: #333333;
+  color: #ffffff;
+}
+body.dark-mode p
+{
+  color: #888;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--background-color-light);
+  color: var(--text-color-light);
+}
+
+body.dark-mode {
+  background-color: var(--background-color-dark);
+  color: var(--text-color-dark);
+}
+
+ol,
+ul {
+  list-style-type: none;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+  /*header*/
+  header {
+    align-items: center;
+    margin:15% 0;
+    text-align: center;
+    padding: 20px;
+  }
+  header div
+  {
+	width: 80vw;
+  }
+  h1 {
+	text-transform: uppercase;
+	font-size: 2em;
+	color: #333;
+	margin-bottom: 20px;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  }
+  
+  p {
+  line-height: 2em;
+	margin-top: 1%;
+	font-size: 18px;
+	color: #666;
+	margin-bottom: 10px;
+  }
+  /**/
+  section
+  {
+	width: 80vw;
+	margin-bottom: 5%;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+.discription {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  text-align: justify;
+}
+
+#recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.recipe {
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color,transform .4s;
+}
+
+.image {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 1%;
+}
+
+.image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.stars {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.reviews {
+  color: #888;
+  margin-right: 10px;
+}
+
+.time {
+  color: #888;
+  margin-bottom: 1%;
+}
+
+
+#ingredients {
+	margin-bottom: 20px;
+}
+
+.section-title {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+#addIngredients {
+	margin-top: 10px;
+}
+
+#search input {
+	padding: 5px;
+	border: 1px solid #ccc;
+	width: 200px;
+}
+
+#ingredientList {
+	margin-top: 10px;
+	padding-left: 20px;
+}
+
+
+#sort {
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+  }
+
+  #sort h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+  }
+
+  .sorting-methods {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+  }
+
+  .sorting-methods label {
+	margin-right: 10px;
+  }
+
+  .slider-container {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+  }
+
+  .slider-label {
+	margin-right: 10px;
+  }
+
+  .star-ratings {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	gap: 5px;
+  }
+
+  .star-ratings label {
+	cursor: pointer;
+  }
+
+  .star-ratings input[type="radio"] {
+	display: none;
+  }
+
+  .star-ratings label::before {
+	content: "\2606";
+	font-size: 20px;
+  }
+
+  .star-ratings input[type="radio"]:checked ~ label::before {
+	content: "\2605";
+  }
+
+
+.recipe:hover
+{
+  background-color: #e3e3e3;
+  cursor: pointer;
+  transform: scale(1.01);
+}

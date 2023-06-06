@@ -1,0 +1,17 @@
+{
+  "title": "coś z niczego",
+  "mainIcon": "./image/icon/mainIcon.jpg",
+  "database":{
+    "host": "localhost",
+    "db": "something_from_nothing",
+    "pass": "",
+    "name": "root",
+    "port": "3306"
+  },
+  "path":{
+    "display":"page/recipe.php",
+    "addRecipePath":"../page/addRecipe.php",
+    "headPath":"./somethingFromNothing/include/head.php"
+  }
+  
+}
