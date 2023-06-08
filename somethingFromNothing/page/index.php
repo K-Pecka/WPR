@@ -1,30 +1,20 @@
 <?php
-$config = json_decode(file_get_contents('../config/config.json'));
-
-require_once '../module/nav.php';
-require_once '../module/head.php';
-require_once '../module/footer.php';
-
 session_start();
 
 $_SESSION['id'] = 1;
-$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
 
-$head = str_replace("{{banner_IMG}}", $config->mainIcon, $head);
+$config = json_decode(file_get_contents('../config/config.json'));
 
-$nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
-$nav = str_replace("{{banner_IMG}}", $config->mainIcon, $nav);
-
+require_once '../module/html.php';
+if (!isset($nav) || !isset($head) || !isset($footer)) {
+	//header('Location: error.php');
+}
 ?>
 <DOCTYPE html>
 	<html>
 
 	<head>
 		<?php echo $head; ?>
-		<link rel="stylesheet" href="../style/style.css">
-		<link rel="stylesheet" href="../style/media.css">
-		<link rel="stylesheet" href="../style/footer.css">
-		<link rel="stylesheet" href="../style/nav.css">
 	</head>
 
 	<body>
@@ -86,11 +76,6 @@ $nav = str_replace("{{banner_IMG}}", $config->mainIcon, $nav);
 			</section>
 
 		</main>
-		<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-		<script src="../JS/fetch.js"></script>
-		<script src="../JS/dark-mode.js"></script>
-		<script src="../JS/nav.js"></script>
-		<script src="../JS/menu.js"></script>
 		<?php echo $footer; ?>
 	</body>
 	<script id="recipe-template" type="text/x-handlebars-template">

@@ -22,4 +22,8 @@ $nav =
       <label for="toggle" class="toggle-label"></label>
     </div>
   </nav>';
+$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
+
 $nav = str_replace("{{TITLE}}", $config->title, $nav);
+$nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
+$nav = str_replace("{{banner_IMG}}", $config->mainIcon, $nav);

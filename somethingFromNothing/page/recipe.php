@@ -1,20 +1,13 @@
 <?php
-$config = json_decode(file_get_contents('../config/config.json'));
-
-require_once '../module/nav.php';
-require_once '../module/head.php';
-require_once '../module/footer.php';
-
 session_start();
 
 $_SESSION['id'] = 1;
-$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
 
-$head = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $head);
-$head = str_replace("{{TITLE}}", $config->title, $head);
+$config = json_decode(file_get_contents('../config/config.json'));
 
-$nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
-$nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
+
+require_once '../module/html.php';
+
 
 ?>
 <DOCTYPE html>
@@ -22,11 +15,6 @@ $nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
 
 	<head>
 		<?php echo $head; ?>
-		<link rel="stylesheet" href="../style/style.css">
-		<link rel="stylesheet" href="../style/media.css">
-		<link rel="stylesheet" href="../style/footer.css">
-		<link rel="stylesheet" href="../style/nav.css">
-		<link rel="stylesheet" href="../style/recipe.css">
 	</head>
 
 	<body>
