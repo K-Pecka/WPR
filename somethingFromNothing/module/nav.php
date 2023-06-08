@@ -17,12 +17,23 @@ $nav =
         <button>SZUKAJ</button>
       </li>
     </ol>
-    <div class="slider-container">
-      <input type="checkbox" id="toggle" class="toggle-checkbox">
-      <label for="toggle" class="toggle-label"></label>
+      <div class="slider-container">
+        <input type="checkbox" id="toggle" class="toggle-checkbox">
+        <label for="toggle" class="toggle-label"></label>
+      </div>
+      <div id="login-button">
+        <button onclick="showLoginPopup()">Zaloguj</button>
+      </div>
+  </nav>
+  <div id="login-popup">
+    <div id="login-content">
+      
     </div>
-  </nav>';
-$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
+  </div>
+  ';
+$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" :
+  "<a style='visibility: hidden;'><img class=\"icon\"\"></a>";
+
 
 $nav = str_replace("{{TITLE}}", $config->title, $nav);
 $nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);

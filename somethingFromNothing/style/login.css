@@ -3,19 +3,12 @@
 
 body,
 .message,
-.form,
-form {
+.form
+{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-body {
-  height: 100vh;
-  background: #e8e8e8;
-  font-family: "Source Sans Pro", sans-serif;
-  overflow: hidden;
 }
 
 .container {

@@ -1,0 +1,17 @@
+
+    <div class="recipe" data-id="{{id}}">
+        <div class="image"><img src="../image/recipe/{{image}}" alt="{{title}}"></div>
+        <div class="title">{{title}}</div>
+        <div class="rating">
+            <div class="stars">
+                {{#each rating}}
+                <span>{{this}}</span>
+                {{/each}}
+            </div>
+            <div class="reviews">{{review}}</div>
+        </div>
+        <div class="time">Czas przygotowania: {{time}} min</div>
+        <div class="discription">
+            {{description}}
+        </div>
+      </div>

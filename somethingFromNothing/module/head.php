@@ -1,6 +1,6 @@
 <?php
-require_once '../script.php';
-require_once '../style.php';
+require_once 'script.php';
+require_once 'style.php';
 $head = '
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="{{banner_IMG}}">

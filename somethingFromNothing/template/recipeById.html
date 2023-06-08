@@ -1,0 +1,34 @@
+<div class="recipe">
+    <div class="image">
+        <img src="../image/recipe/{{image}}" alt="Przepis">
+    </div>
+    <div class="details">
+        <h2>{{title}}</h2>
+        <div class="rating">
+            <div class="stars">
+                {{#each rating}}
+                <span>{{this}}</span>
+                {{/each}}
+            </div>
+            <span class="reviews">({{review}} ocen)</span>
+        </div>
+        <div class="description">{{description}}</div>
+        <p class="time">Czas gotowania: {{time}} minut</p>
+        <div class="ingredients">
+            <h3>Składniki:</h3>
+            <ul class="ingredients">
+                {{#each ingridients}}
+                <li>{{this}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="instructions">
+            <h3>Instrukcje:</h3>
+            <ul class="ingredients">
+                {{#each preparations}}
+                <li>{{description}} - {{time}} minutes</li>
+                {{/each}}
+            </ul>
+        </div>
+</div>

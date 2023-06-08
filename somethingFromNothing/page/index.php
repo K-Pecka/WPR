@@ -1,13 +1,10 @@
 <?php
 session_start();
-
-$_SESSION['id'] = 1;
-
 $config = json_decode(file_get_contents('../config/config.json'));
 
 require_once '../module/html.php';
-if (!isset($nav) || !isset($head) || !isset($footer)) {
-	//header('Location: error.php');
+if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
+	header('Location: error.php');
 }
 ?>
 <DOCTYPE html>
@@ -21,12 +18,7 @@ if (!isset($nav) || !isset($head) || !isset($footer)) {
 		<?php echo $nav; ?>
 		<main id="content">
 			<header>
-				<div>
-					<h1>Kulinarna Magia z Kliku składników</h1>
-					<p>Daj się porwać w wir gotowania i odkryj, jak zamienić codzienne składniki z lodówki w wyjątkowe kulinaria. Zaskocz swoje podniebienie, eksperymentując z prostymi przepisami, które nie wymagają skomplikowanych technik ani długiego czasu gotowania. Nasze przepisy płyną prosto z społeczności osób, które cenią sobie łatwość i chcą się podzielić wyczarowanymi smakowitymi arcydziełami.</p>
-					<p>Zapomnij o skomplikowanych przepisach i długiej liście zakupów. Dzięki naszym wskazówkom i pomysłom na wykorzystanie dostępnych składników w Twojej lodówce, każdy posiłek stanie się niezwykłą ucztą. Od chwilowego zastrzyku energii w postaci pysznego smoothie po kremowe zupy, soczyste sałatki i wykwintne dania główne - wszystko to możesz zrobić z prostych składników, które już posiadasz.</p>
-				</div>
-
+				<?php echo $header ?>
 			</header>
 			<!--section id="ingredients">
 				<h2 class="section-title">Składniki</h2>
@@ -76,25 +68,9 @@ if (!isset($nav) || !isset($head) || !isset($footer)) {
 			</section>
 
 		</main>
-		<?php echo $footer; ?>
+		<?php echo $footer;
+		var_dump($_SESSION); ?>
 	</body>
-	<script id="recipe-template" type="text/x-handlebars-template">
-		<div class="recipe" data-id="{{id}}">
-			<div class="image"><img src="../image/recipe/{{image}}" alt="{{title}}"></div>
-			<div class="title">{{title}}</div>
-			<div class="rating">
-				<div class="stars">
-					{{#each rating}}
-					<span>{{this}}</span>
-					{{/each}}
-				</div>
-				<div class="reviews">{{review}}</div>
-			</div>
-			<div class="time">Czas przygotowania: {{time}} min</div>
-			<div class="discription">
-				{{description}}
-			</div>
-  		</div>
-	</script>
+	<link rel="import" href="../template/recipe.html">
 
 	</html>

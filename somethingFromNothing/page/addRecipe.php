@@ -1,9 +1,11 @@
 <?php
 session_start();
-
-$_SESSION['id'] = 1;
-
+session_destroy();
 $config = json_decode(file_get_contents('../config/config.json'));
+
+if (!isset($_SESSION['id'])) {
+	header('Location:' . $config->path->index);
+}
 
 require_once '../module/html.php';
 
@@ -13,18 +15,15 @@ require_once '../module/html.php';
 
 	<head>
 		<?php echo $head; ?>
+		<script src="../JS/module.js" defer></script>
+		<link rel="stylesheet" href="../style/addRecipe.css">
 	</head>
 
 	<body>
 		<?php echo $nav; ?>
 		<main id="content">
 			<header>
-				<div>
-					<h1>Kulinarna Magia z Kliku składników</h1>
-					<p>Daj się porwać w wir gotowania i odkryj, jak zamienić codzienne składniki z lodówki w wyjątkowe kulinaria. Zaskocz swoje podniebienie, eksperymentując z prostymi przepisami, które nie wymagają skomplikowanych technik ani długiego czasu gotowania. Nasze przepisy płyną prosto z społeczności osób, które cenią sobie łatwość i chcą się podzielić wyczarowanymi smakowitymi arcydziełami.</p>
-					<p>Zapomnij o skomplikowanych przepisach i długiej liście zakupów. Dzięki naszym wskazówkom i pomysłom na wykorzystanie dostępnych składników w Twojej lodówce, każdy posiłek stanie się niezwykłą ucztą. Od chwilowego zastrzyku energii w postaci pysznego smoothie po kremowe zupy, soczyste sałatki i wykwintne dania główne - wszystko to możesz zrobić z prostych składników, które już posiadasz.</p>
-				</div>
-
+				<?php echo $header ?>
 			</header>
 			<section id="recipe">
 				<div class="recipe">
@@ -69,14 +68,6 @@ require_once '../module/html.php';
 			<span class="close">&times;</span>
 			<h2>Wybierz składniki</h2>
 			<div class="ingredients-grid" id="addIng">
-				<div>
-					<div class="ingredient-tile">
-						<label>
-							<input type="checkbox" data-id="{{id}}">
-							this</label>
-					</div>
-				</div>
-
 			</div>
 			<button class="addToAdd">Dodaj</button>
 		</div>

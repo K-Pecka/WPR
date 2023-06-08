@@ -1,7 +1,7 @@
 var getData = () => {
     var currentURL = window.location.href;
     var [currentURL, id] = currentURL.split('/').pop().split('?');
-    console.log(currentURL);
+    currentURL=currentURL.split('#').join('');
     switch (currentURL) {
       case '':
       case 'index.php':
@@ -9,6 +9,9 @@ var getData = () => {
         break;
       case 'recipe.php':
         getRecipesForId(id);
+        break;
+      case 'addRecipe.php':
+        document.querySelector('#addIngridient').addEventListener('click', getIngredient);
         break;
     }
   };

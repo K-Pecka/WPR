@@ -1,4 +1,4 @@
-const toggleCheckbox = document.querySelector('.toggle-checkbox');
+var toggleCheckbox = document.querySelector('.toggle-checkbox');
 
 window.addEventListener('load', function() {
   const darkModeEnabled = localStorage.getItem('darkModeEnabled');

@@ -9,7 +9,7 @@
     "port": "3306"
   },
   "path":{
-    "index":"./",
+    "index":"../",
     "display":"./recipe.php",
     "addRecipePath":"../page/addRecipe.php",
     "headPath":"./somethingFromNothing/include/head.php"
