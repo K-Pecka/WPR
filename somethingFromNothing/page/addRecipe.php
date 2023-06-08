@@ -10,11 +10,11 @@ session_start();
 $_SESSION['id'] = 1;
 $addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
 
-$head = str_replace("{{BANER_IMG}}", "../" . $config->mainIcon, $head);
+$head = str_replace("{{banner_IMG}}", "../" . $config->mainIcon, $head);
 $head = str_replace("{{TITLE}}", $config->title, $head);
 
 $nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
-$nav = str_replace("{{BANER_IMG}}", "../" . $config->mainIcon, $nav);
+$nav = str_replace("{{banner_IMG}}", "../" . $config->mainIcon, $nav);
 
 ?>
 <DOCTYPE html>
@@ -98,7 +98,13 @@ $nav = str_replace("{{BANER_IMG}}", "../" . $config->mainIcon, $nav);
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-	<script src="../JS/index.js"></script>
+
+	<script src="../JS/fetch.js"></script>
+	<script src="../JS/dark-mode.js"></script>
+	<script src="../JS/nav.js"></script>
+	<script src="../JS/menu.js"></script>
+	<script src="../JS/module.js"></script>
+
 	<script id="ingredient-template" type="text/x-handlebars-template">
 		<div>
 			<div class="ingredient-tile">

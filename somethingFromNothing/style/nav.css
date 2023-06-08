@@ -22,18 +22,19 @@ nav {
 	display: flex;
 	align-items: center;
   }
-  #baner {
-	display: flex;
-	align-items: center;
+  #banner {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   
-  #baner img {
+  #banner img {
 	width: 50px;
 	height: 50px;
 	margin-right: 10px;
   }
   
-  #baner #title {
+  #banner #title {
 	font-size: 18px;
 	font-weight: bold;
   }

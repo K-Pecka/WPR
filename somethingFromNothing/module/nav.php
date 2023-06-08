@@ -1,9 +1,9 @@
 <?php
 $nav =
   '<nav id="main-nav">
-    <div id="baner">
-      <img src="{{BANER_IMG}}" alt="baner.jpg" class="icon">
-      <div id="title">{{TITLE}}</div>
+    <div id="banner">
+        <img src="{{banner_IMG}}" alt="banner.jpg" class="icon">
+        <div id="title">{{TITLE}}</div>
     </div>
     <div id="menu-toggle">
       <input type="checkbox" id="menu-checkbox">

@@ -10,11 +10,10 @@ session_start();
 $_SESSION['id'] = 1;
 $addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" : "";
 
-$head = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $head);
-$head = str_replace("{{TITLE}}", $config->title, $head);
+$head = str_replace("{{banner_IMG}}", $config->mainIcon, $head);
 
 $nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
-$nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
+$nav = str_replace("{{banner_IMG}}", $config->mainIcon, $nav);
 
 ?>
 <DOCTYPE html>
@@ -26,7 +25,6 @@ $nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
 		<link rel="stylesheet" href="../style/media.css">
 		<link rel="stylesheet" href="../style/footer.css">
 		<link rel="stylesheet" href="../style/nav.css">
-		<link rel="stylesheet" href="../style/recipe.css">
 	</head>
 
 	<body>
@@ -40,9 +38,53 @@ $nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
 				</div>
 
 			</header>
-			<section id="recipe">
-
+			<!--section id="ingredients">
+				<h2 class="section-title">Składniki</h2>
+				<div id="addIngredients">
+					<div id="search">
+						<input>
+					</div>
+					<ol id="ingredientList"></ol>
+				</div>
 			</section>
+			<section-- id="sort">
+				<h2>Przepisy</h2>
+				<div class="sorting-methods">
+					<label for="sortMethod">Sortuj według:</label>
+					<select id="sortMethod">
+						<option value="name">Nazwa</option>
+						<option value="time">Czas przygotowania</option>
+						<option value="difficulty">Stopień trudności</option>
+					</select>
+				</div>
+				<div class="slider-container">
+					<label class="slider-label">Średnia ilość ocen:</label>
+					<input type="range" min="0" max="10000" value="0" class="slider" id="ratingSlider">
+					<span class="slider-value" id="ratingValue">0</span>
+				</div>
+				<div class="slider-container">
+					<label class="slider-label">Średnia ocen i ilość składników:</label>
+					<div class="star-ratings">
+						<input type="radio" name="rating" id="rating-1">
+						<label for="rating-1"></label>
+
+						<input type="radio" name="rating" id="rating-2">
+						<label for="rating-2"></label>
+
+						<input type="radio" name="rating" id="rating-3">
+						<label for="rating-3"></label>
+
+						<input type="radio" name="rating" id="rating-4">
+						<label for="rating-4"></label>
+
+						<input type="radio" name="rating" id="rating-5">
+						<label for="rating-5"></label>
+					</div>
+				</div>
+			</section-->
+			<section id="recipes">
+			</section>
+
 		</main>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
 		<script src="../JS/fetch.js"></script>
@@ -52,40 +94,22 @@ $nav = str_replace("{{banner_IMG}}", "" . $config->mainIcon, $nav);
 		<?php echo $footer; ?>
 	</body>
 	<script id="recipe-template" type="text/x-handlebars-template">
-		<div class="recipe">
-					<div class="image">
-						<img src="../image/recipe/{{image}}" alt="Przepis">
-					</div>
-					<div class="details">
-						<h2>{{title}}</h2>
-						<div class="rating">
-							<div class="stars">
-								{{#each rating}}
-								<span>{{this}}</span>
-								{{/each}}
-							</div>
-							<span class="reviews">({{review}} ocen)</span>
-						</div>
-						<div class="description">{{description}}</div>
-						<p class="time">Czas gotowania: {{time}} minut</p>
-						<div class="ingredients">
-							<h3>Składniki:</h3>
-							<ul class="ingredients">
-								{{#each ingridients}}
-								<li>{{this}}</li>
-								{{/each}}
-							</ul>
-						</div>
-					</div>
-					<div class="instructions">
-							<h3>Instrukcje:</h3>
-							<ul class="ingredients">
-								{{#each preparations}}
-								<li>{{description}} - {{time}} minutes</li>
-								{{/each}}
-							</ul>
-						</div>
+		<div class="recipe" data-id="{{id}}">
+			<div class="image"><img src="../image/recipe/{{image}}" alt="{{title}}"></div>
+			<div class="title">{{title}}</div>
+			<div class="rating">
+				<div class="stars">
+					{{#each rating}}
+					<span>{{this}}</span>
+					{{/each}}
 				</div>
+				<div class="reviews">{{review}}</div>
+			</div>
+			<div class="time">Czas przygotowania: {{time}} min</div>
+			<div class="discription">
+				{{description}}
+			</div>
+  		</div>
 	</script>
 
 	</html>
