@@ -112,7 +112,6 @@ var displayRecipe = (el) => {
     .then(response => response.text())
       .then(html => {
         document.querySelector('#login-content').innerHTML = html;
-        console.log(html);
       })
       .catch(error => {
         console.error('Błąd pobierania danych:', error);
@@ -120,4 +119,21 @@ var displayRecipe = (el) => {
       });
   };
   
-  
+   var register = () =>{
+    var formData = new FormData();
+    formData.append("username", "user");
+    formData.append("password", "123");
+    console.log(formData);
+    fetch("register.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  };

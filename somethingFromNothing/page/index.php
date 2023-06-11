@@ -68,9 +68,6 @@ if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 			</section>
 
 		</main>
-		<?php echo $footer;
-		var_dump($_SESSION); ?>
+		<?php echo $footer; ?>
 	</body>
-	<link rel="import" href="../template/recipe.html">
-
 	</html>

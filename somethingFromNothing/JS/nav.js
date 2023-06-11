@@ -22,7 +22,6 @@ window.onscroll = function() {
 
 function showLoginPopup() {
   document.getElementById('login-popup').style.display = 'block';
-  console.log(document.querySelector('#login-content').innerHTML);
     getLoginForm();
     setTimeout(
     ()=>{
@@ -35,18 +34,26 @@ function showLoginPopup() {
       }
 
       message.classList.add("signup");
-    });
+      });
+      
+      document.getElementById("login").addEventListener("click", function() {
+        var message = document.querySelector(".message");
+        message.style.transform = "translateX(0)";
 
-    document.getElementById("login").addEventListener("click", function() {
-      var message = document.querySelector(".message");
-      message.style.transform = "translateX(0)";
-
-      if (message.classList.contains("signup")) {
-        message.classList.remove("signup");
+        if (message.classList.contains("signup")) {
+          message.classList.remove("signup");
+        }
+        
+        message.classList.add("login");
       }
-
-      message.classList.add("login");
-    })},1000);
+    );
+    console.log(document.querySelector('.container .form--signup form'));
+    document.querySelector('.container .form--signup form').addEventListener('submit',(e)=>{
+      e.preventDefault();
+      signUp(e)
+    });
+  },1000);
+    
 }
 
 function hideLoginPopup() {
