@@ -21,8 +21,12 @@ $nav =
         <input type="checkbox" id="toggle" class="toggle-checkbox">
         <label for="toggle" class="toggle-label"></label>
       </div>
-      <div id="login-button">
-        <button onclick="showLoginPopup()">Zaloguj</button>
+      <div class="user-menu">
+        {{USER_MENU}}
+        <ul class="user-dropdown">
+          <li><a href="panelUser.php">Panel użytkownika</a></li>
+          <li><a href="#" onclick="logout()">Wyloguj</a></li>
+        </ul>
       </div>
   </nav>
   <div id="login-popup">
@@ -30,11 +34,18 @@ $nav =
       
     </div>
   </div>
-  ';
-$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"\"></a>" :
-  "<a style='visibility: hidden;'><img class=\"icon\"\"></a>";
+';
 
+$addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePath . "\" target=\"_blank\"><img src=\"../image/icon/add.png\" class=\"icon\"></a>" :
+  "<a style='visibility: hidden;'><img class=\"icon\"></a>";
+
+$userMenu = isset($_SESSION['id']) ?
+  "<img src=\"../image/user/random.jpg\" alt=\"User Image\" class=\"user-image user-menu userMenu\">" :
+  '<div id="login-button">
+    <button onclick="showLoginPopup()">Zaloguj</button>
+  </div>';
 
 $nav = str_replace("{{TITLE}}", $config->title, $nav);
 $nav = str_replace("{{ADD_RECIPE}}", $addRecipe, $nav);
 $nav = str_replace("{{banner_IMG}}", $config->mainIcon, $nav);
+$nav = str_replace("{{USER_MENU}}", $userMenu, $nav);

@@ -26,7 +26,7 @@ header{
   background-color: var(--background-color-light);
   color: var(--text-color-light);
 }
-body.dark-mode nav,
+body.dark-mode #main-nav,
 body.dark-mode footer,
 body.dark-mode header,
 body.dark-mode h1

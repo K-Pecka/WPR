@@ -108,7 +108,7 @@ var displayRecipe = (el) => {
       });
   };
   var getLoginForm = () => {
-    fetch('../module/login.html')
+    fetch('../template/login.html')
     .then(response => response.text())
       .then(html => {
         document.querySelector('#login-content').innerHTML = html;
@@ -119,12 +119,9 @@ var displayRecipe = (el) => {
       });
   };
   
-   var register = () =>{
-    var formData = new FormData();
-    formData.append("username", "user");
-    formData.append("password", "123");
+   var register = (formData) =>{
     console.log(formData);
-    fetch("register.php", {
+    fetch("../service/register.php", {
       method: "POST",
       body: formData
     })

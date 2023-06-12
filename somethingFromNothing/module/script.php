@@ -6,5 +6,6 @@ $script = '
 	<script src="../JS/dark-mode.js" defer></script>
 	<script src="../JS/nav.js" defer></script>
 	<script src="../JS/menu.js" defer></script>
+    <script src="../JS/signUp.js" defer></script>
     
     ';

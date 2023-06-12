@@ -10,8 +10,7 @@ var prevScrollPos = window.pageYOffset;
 
 window.onscroll = function() {
   var currentScrollPos = window.pageYOffset;
-
-  if (prevScrollPos > currentScrollPos || currentScrollPos > window.innerHeight) {
+  if (prevScrollPos > currentScrollPos || currentScrollPos < window.innerHeight) {
     document.getElementById("main-nav").classList.remove("hiden");
   } else {
     document.getElementById("main-nav").classList.add("hiden");
@@ -50,7 +49,7 @@ function showLoginPopup() {
     console.log(document.querySelector('.container .form--signup form'));
     document.querySelector('.container .form--signup form').addEventListener('submit',(e)=>{
       e.preventDefault();
-      signUp(e)
+      signUp(e);
     });
   },1000);
     
@@ -72,3 +71,30 @@ document.addEventListener('DOMContentLoaded', function() {
     dropdownMenu.style.display = checkbox.checked ? 'block' : 'none';
   });
 });
+
+
+function toggleUserMenu() {
+  var dropdown = document.querySelector('.user-dropdown');
+  dropdown.classList.toggle('show');
+}
+if(document.querySelector('.userMenu'))
+{
+  var userImage = document.querySelector('.user-image');
+  document.querySelector('.user-image').addEventListener('click',toggleUserMenu);
+  document.addEventListener('scroll', function(event) {
+    var userDropdown = document.querySelector('.user-dropdown');
+    var targetElement = event.target;
+    
+    if (userDropdown && !userDropdown.contains(targetElement) && !userImage.contains(targetElement)) {
+      userDropdown.classList.remove('show');
+    }
+  });
+  document.addEventListener('click', function(event) {
+  var userDropdown = document.querySelector('.user-dropdown');
+  var targetElement = event.target;
+  
+  if (userDropdown && !userDropdown.contains(targetElement) && !userImage.contains(targetElement)) {
+    userDropdown.classList.remove('show');
+  }
+});
+}

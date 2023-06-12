@@ -1,6 +1,5 @@
 <?php
 session_start();
-session_destroy();
 $config = json_decode(file_get_contents('../config/config.json'));
 
 if (!isset($_SESSION['id'])) {
