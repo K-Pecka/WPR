@@ -25,7 +25,7 @@ $nav =
         {{USER_MENU}}
         <ul class="user-dropdown">
           <li><a href="panelUser.php">Panel użytkownika</a></li>
-          <li><a href="#" onclick="logout()">Wyloguj</a></li>
+          <li><a href="#" class="logOut">Wyloguj</a></li>
         </ul>
       </div>
   </nav>
@@ -40,7 +40,7 @@ $addRecipe = isset($_SESSION['id']) ? "<a href=\"" . $config->path->addRecipePat
   "<a style='visibility: hidden;'><img class=\"icon\"></a>";
 
 $userMenu = isset($_SESSION['id']) ?
-  "<img src=\"../image/user/random.jpg\" alt=\"User Image\" class=\"user-image user-menu userMenu\">" :
+  "<img src=\"../image/public/user/random.jpg\" alt=\"User Image\" class=\"user-image user-menu userMenu\">" :
   '<div id="login-button">
     <button onclick="showLoginPopup()">Zaloguj</button>
   </div>';

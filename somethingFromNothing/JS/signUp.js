@@ -3,7 +3,6 @@ var somePasswords = (passOne, passTwo) => passOne === passTwo && passOne.length 
 var nickName = (nick) => /^[a-zA-Z0-9_-]+$/.test(nick) && nick.length >= 3 && nick.length <= 20;
 
 var signUp = (e) => {
-  e.preventDefault(); // Zapobiega domyślnemu zachowaniu formularza
 
   var formData = new FormData(e.target);
   var nickname = e.target.querySelector('input[name="nickname"]').value;

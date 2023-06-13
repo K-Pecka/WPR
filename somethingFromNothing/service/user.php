@@ -1,12 +1,10 @@
 <?php
 function getImage($id)
 {
-    $found_images = array();
-
     if (($handle = fopen('../data/user.csv', 'r')) !== false) {
         while (($data = fgetcsv($handle, 0, ';')) !== false) {
             if ($data[2] == $id) {
-                $found_images[] = $data[3];
+                $found_images = $data[3];
             }
         }
         fclose($handle);

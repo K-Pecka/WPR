@@ -134,3 +134,23 @@ var displayRecipe = (el) => {
       console.log(error);
     });
   };
+  var logIn = (formData) =>{
+    console.log(formData);
+    fetch("../service/login.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  };
+  var logOut = () =>
+  {
+    fetch("../service/logOut.php");
+    location.reload();
+  }

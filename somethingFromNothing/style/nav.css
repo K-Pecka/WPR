@@ -312,3 +312,79 @@
   .user-menu .user-dropdown li:hover {
     background-color: #f5f5f5;
   }
+
+
+
+  .user-panel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .user-profile {
+    text-align: center;
+    margin-right: 30px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  h2,
+  p {
+    margin: 5px 0;
+  }
+
+  .edit-profile {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .panel-user-menu {
+    margin-top: 20px;
+    width: 80%;
+  }
+
+  .panel-user-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .panel-user-menu li {
+    margin-bottom: 10px;
+  }
+
+  .panel-user-menu a {
+    display: block;
+    padding: 10px 10px;
+    background-color: #f5f5f5;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .panel-user-menu a:hover {
+    background-color: #e0e0e0;
+  }
+
+  .user-section {
+    display: block;
+    padding: 20px;
+    background-color: #f5f5f5;
+    margin-top: 20px;
+  }
+
+  #footer {
+    background-color: #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+  }

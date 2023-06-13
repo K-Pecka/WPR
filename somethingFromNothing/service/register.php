@@ -1,25 +1,7 @@
 <?php
 session_start();
 $config = json_decode(file_get_contents('../config/config.json'));
-
-function emailVerification($email)
-{
-    return preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email) && strlen($email) > 0;
-}
-
-function somePasswords($passOne, $passTwo)
-{
-    return $passOne === $passTwo && strlen($passOne) >= 8 && strlen($passOne) <= 30;
-}
-
-function nickName($nick)
-{
-    return preg_match('/^[a-zA-Z0-9_-]+$/', $nick) && strlen($nick) >= 3 && strlen($nick) <= 20;
-}
-function setSignUp($id)
-{
-    $_SESSION['id'] = $id;
-}
+require_once 'function.php';
 if (isset($_POST['nickName']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['passwordVerification'])) {
     try {
         $pdo = new PDO("mysql:host=" . $config->database->host . ";dbname=" . $config->database->db . ";port=" . $config->database->port . ";charset=utf8", $config->database->name, $config->database->pass);

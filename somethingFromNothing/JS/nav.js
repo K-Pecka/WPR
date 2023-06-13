@@ -51,6 +51,10 @@ function showLoginPopup() {
       e.preventDefault();
       signUp(e);
     });
+    document.querySelector('.container .form--login form').addEventListener('submit',(e)=>{
+      e.preventDefault();
+      logged(e);
+    });
   },1000);
     
 }
@@ -97,4 +101,6 @@ if(document.querySelector('.userMenu'))
     userDropdown.classList.remove('show');
   }
 });
+document.querySelector('.LogOut').addEventListener('click',logOut);
 }
+
