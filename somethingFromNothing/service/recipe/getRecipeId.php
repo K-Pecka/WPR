@@ -80,8 +80,8 @@ try {
     $query =
         'SELECT `name` as "title", `image`, SUBSTRING(`recipe`.`description`, 1, 1000) as "description", FLOOR(AVG(`rating`)) as "rating", COUNT(*) as "review", SUM(`time`) as "time"
         FROM `recipe`
-        JOIN `rating` ON `recipe`.`id` = `rating`.`id_recipe`
-        JOIN `preparation` ON `recipe`.`id` = `preparation`.`id_recipe`
+        LEFT JOIN `rating` ON `recipe`.`id` = `rating`.`id_recipe`
+        LEFT JOIN `preparation` ON `recipe`.`id` = `preparation`.`id_recipe`
         WHERE `recipe`.`id` = :id
         GROUP BY `recipe`.`id`';
 
@@ -102,21 +102,22 @@ try {
     $statement->execute();
     $preparations = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$data || !$ingridients || !$preparations) {
+    if (!$data) {
         echo json_encode(['error' => 'Recipe not found']);
         exit();
     }
+    $preparationsArray = array();
+    $ingridientsArray = array();
     foreach ($ingridients as $ingridient) {
         $ingridientsArray[] = $ingridient['name'];
     }
     foreach ($preparations as $preparation) {
         if (is_array($preparation) && isset($preparation['description']) && isset($preparation['time'])) {
             $preparationsArray[] = new Preparation($preparation['description'], $preparation['time']);
-        } else {
-            var_dump($preparation);
         }
     }
-
+    if (empty($preparationsArray)) $preparationsArray[] = new Preparation("Not found", 0);
+    if (empty($ingridientsArray)) $ingridientsArray[] = "Not found";
     $recipe = new Recipe($data['title'], $data['time'], $data['image'], $data['description'], $data['rating'], $data['review'], false, $preparationsArray, $ingridientsArray);
 
     header('Content-Type: application/json');

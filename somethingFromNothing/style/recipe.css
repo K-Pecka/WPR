@@ -100,7 +100,22 @@
   border: 1px solid #ccc;
   background-color: #f5f5f5;
 }
-
+section:last-child
+{
+  display: flex;
+}
+#comment
+{
+  background-color: #888;
+  width: 70%;
+  padding: 5%;
+}
+#recommended
+{
+  background-color: #ccc;
+  width: 30%;
+  padding: 5%;
+}
 .comment-author {
   display: flex;
   align-items: center;

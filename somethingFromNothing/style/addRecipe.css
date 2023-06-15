@@ -108,4 +108,12 @@
     background-color: #42b983;
     color: #fff;
   }
-  
+  .ingredient-box
+  {
+    padding: 0.1%;
+    min-width: 25%;
+  }
+  .ingredient-box:hover
+  {
+    background-color: #c5bec5;
+  }

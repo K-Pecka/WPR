@@ -1,13 +1,13 @@
 <?php
 session_start();
-$config = json_decode(file_get_contents('../config/config.json'));
+require_once '../module/setPage.php';
 
-if (!isset($_SESSION['id'])) {
-	header('Location:' . $config->path->index);
+if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
+	header('Location: error.php');
 }
-
-require_once '../module/html.php';
-
+if (!isset($_SESSION['id'])) {
+	header('Location: /');
+}
 ?>
 <DOCTYPE html>
 	<html>
@@ -73,7 +73,7 @@ require_once '../module/html.php';
 	</div>
 
 	<script id="ingredient-template" type="text/x-handlebars-template">
-		<div>
+		<div class="ingredient-box">
 			<div class="ingredient-tile">
 				<label>
 					<input type="checkbox" value="{{id}}">

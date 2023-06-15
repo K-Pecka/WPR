@@ -1,0 +1,28 @@
+{
+  "title": "Something for Nothing",
+  "mainIcon": "../image/icon/mainIcon.jpg",
+  "database":{
+    "host": "localhost",
+    "db": "something_from_nothing",
+    "pass": "",
+    "name": "root",
+    "port": "3306"
+  },
+  "path":{
+    "index":"../",
+    "display":"./recipe.php",
+    "addRecipePath":"../page/addRecipe.php",
+    "headPath":"./somethingFromNothing/include/head.php"
+  },
+  "HTML":{
+    "h1": "Culinary Magic with Few Ingredients",
+    "header": [
+      "Let yourself be carried away by the whirlwind of cooking and discover how to turn everyday ingredients from the fridge into unique culinary creations. Surprise your palate by experimenting with simple recipes that don't require complicated techniques or long cooking times. Our recipes come straight from a community of people who appreciate ease and want to share the tasty masterpieces they have conjured up.","Forget complicated recipes and long shopping lists. Thanks to our tips and ideas for using the available ingredients in your fridge, every meal will become an extraordinary feast. From a momentary energy boost in the form of a delicious smoothie to creamy soups, juicy salads and gourmet main dishes, you can make it all with simple ingredients you already have."
+    ],
+    "search":{
+      "placeholder":"Press Enter to find a recipe or # to show all recipes",
+      "button":{"title": "search"}
+    },
+    "login":"Log in"
+  }
+}

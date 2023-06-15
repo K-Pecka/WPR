@@ -40,7 +40,7 @@ var displayRecipe = (el) => {
   
       var response = await fetch('../service/recipe/getRecipes.php');
       var data = await response.json();
-  
+      if(data.error)console.log(data.error);
       data.map((el) => {
         el.rating = '★'.repeat(el.rating).padEnd(5, '☆').split('');
         el.time = el.time === null ? 0 : el.time;
@@ -65,12 +65,10 @@ var displayRecipe = (el) => {
     try {
       var response = await fetch('../service/recipe/getRecipeId.php?' + id);
       var data = await response.json();
-  
       if (typeof Handlebars === 'undefined') {
         document.querySelector("#recipe").innerHTML = "Błąd Servera 500";
         return;
       }
-  
       data.rating = '★'.repeat(data.rating).padEnd(5, '☆').split('');
       var templateSource = await getTemp('recipeById.html');
       var templateElement = parseHTML(templateSource);
@@ -99,7 +97,6 @@ var displayRecipe = (el) => {
         data.forEach(el => {
           html += recipeTemplate(el);
         });
-        console.log(html);
         recipeContainer.innerHTML = html;
       })
       .catch(error => {
@@ -173,7 +170,7 @@ var displayRecipe = (el) => {
   }
   var getRecipesComments = async (id) => {
     try {
-      var response = await fetch('../service/getRecipeComments.php?' + id);
+      var response = await fetch('../service/recipe/getRecipeComments.php?' + id);
       var data = await response.json();
   
       if (typeof Handlebars === 'undefined') {

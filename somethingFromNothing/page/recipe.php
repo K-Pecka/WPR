@@ -1,12 +1,10 @@
 <?php
 session_start();
+require_once '../module/setPage.php';
 
-
-$config = json_decode(file_get_contents('../config/config.json'));
-
-
-require_once '../module/html.php';
-
+if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
+	header('Location: error.php');
+}
 
 ?>
 <DOCTYPE html>
@@ -26,28 +24,31 @@ require_once '../module/html.php';
 			<section id="recipe">
 
 			</section>
-			<section id="comment">
-				<h2>Comments</h2>
-				<form id="comment-form" method="POST">
-					<div>
-						<label for="name">Name:</label>
-						<input type="text" id="name" name="name" required>
-					</div>
-					<div>
-						<label for="content">Content:</label>
-						<textarea id="content" name="content" required></textarea>
-					</div>
-					<div>
-						<button type="submit">Add Comment</button>
-					</div>
-				</form>
-				<div id="comments">
+			<section>
+				<section id="comment">
+					<h2>Comments</h2>
+					<form id="comment-form" method="POST">
+						<div>
+							<label for="name">Name:</label>
+							<input type="text" id="name" name="name" required>
+						</div>
+						<div>
+							<label for="content">Content:</label>
+							<textarea id="content" name="content" required></textarea>
+						</div>
+						<div>
+							<button type="submit">Add Comment</button>
+						</div>
+					</form>
+					<div id="comments">
 
-				</div>
+					</div>
+				</section>
+				<section id="recommended">
+					coś
+				</section>
 			</section>
-			<section id="recommended">
-				
-			</section>
+
 		</main>
 		<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
 		<script src="../JS/fetch.js"></script>

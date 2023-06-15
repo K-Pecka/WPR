@@ -5,7 +5,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $query =
-        'SELECT `recipe`.`id`,`name` as "title",`image`,SUBSTRING(`recipe`.`description`,1,250) as "description",FLOOR(AVG(`rating`)) as "rating",COUNT(*) as "review", SUM(`time`) as "time" FROM `recipe` JOIN `rating` ON `recipe`.`id`=`rating`.`id_recipe` LEFT JOIN `preparation` ON `recipe`.`id`=`preparation`.`id_recipe` GROUP BY `recipe`.`id`';
+        'SELECT `recipe`.`id`,`name` as "title",`image`,SUBSTRING(`recipe`.`description`,1,250) as "description",FLOOR(AVG(`rating`)) as "rating",COUNT(*) as "review", SUM(`time`) as "time",`favorite_recipe`.`id_user` FROM `favorite_recipe` RIGHT JOIN `recipe` ON `favorite_recipe`.`id_recipe` = `recipe`.`id` LEFT JOIN `preparation` ON `preparation`.`id_recipe` = `recipe`.`id` JOIN `rating` ON `recipe`.`id`=`rating`.`id_recipe` GROUP BY `recipe`.`id`';
 
     $statement = $pdo->query($query);
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
