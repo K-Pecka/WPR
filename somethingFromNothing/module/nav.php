@@ -21,7 +21,6 @@ $nav =
         <label for="toggle" class="toggle-label"></label>
       </div>
       <div class="user-menu">
-      <div class="lang-select">
         {{USER_MENU}}
       </div>
   </nav>
@@ -42,12 +41,12 @@ $userMenu = isset($_SESSION['id']) ?
           </a>
         </li>
         <li>
-        <div class="lang-select">
-        <select>
-          <option value="pl">PL</option>
-          <option value="eng" selected>ENG</option>
-        </select>
-      </div>
+          <div class="lang-select">
+            <select>
+              <option value="pl">PL</option>
+              <option value="eng" selected>ENG</option>
+            </select>
+          </div>
         </li>
         <li><a href="#" class="logOut">Wyloguj</a></li>
       </ul>' :
