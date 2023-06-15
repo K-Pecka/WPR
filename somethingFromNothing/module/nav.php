@@ -24,7 +24,7 @@ $nav =
       <div class="user-menu">
         {{USER_MENU}}
         <ul class="user-dropdown">
-          <li><a href="panelUser.php">Panel użytkownika</a></li>
+          <li><a href="userPanel.php">Panel użytkownika</a></li>
           <li><a href="#" class="logOut">Wyloguj</a></li>
         </ul>
       </div>

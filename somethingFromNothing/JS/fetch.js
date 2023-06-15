@@ -119,7 +119,7 @@ var displayRecipe = (el) => {
       });
   };
   
-   var register = (formData) =>{
+   var register = (formData,feedBack) =>{
     console.log(formData);
     fetch("../service/register.php", {
       method: "POST",
@@ -127,7 +127,16 @@ var displayRecipe = (el) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json);
+      if(json.error)
+      {
+        console.log(json.error);
+        feedBack.textContent = json.error;
+      }
+      else
+      {
+        location.reload();
+        console.log(json.success);
+      }
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);
@@ -142,7 +151,15 @@ var displayRecipe = (el) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json);
+      if(json.error)
+      {
+        console.log(json.error);
+      }
+      else
+      {
+        location.reload();
+        console.log(json.success);
+      }
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);
@@ -154,3 +171,23 @@ var displayRecipe = (el) => {
     fetch("../service/logOut.php");
     location.reload();
   }
+  var getRecipesComments = async (id) => {
+    try {
+      var response = await fetch('../service/getRecipeComments.php?' + id);
+      var data = await response.json();
+  
+      if (typeof Handlebars === 'undefined') {
+        document.querySelector("#recipe").innerHTML = "Błąd Servera 500";
+        return;
+      }
+      var templateSource = await getTemp('comment.html');
+      var templateElement = parseHTML(templateSource);
+      var recipeTemplate = Handlebars.compile(templateElement.innerHTML);
+      var recipeContainer = document.getElementById("comments");
+      var comments ="";
+      data.forEach(el=>comments+=recipeTemplate(el));
+      recipeContainer.innerHTML = comments;
+    } catch (error) {
+      console.error('Błąd pobierania danych:', error);
+    }
+  };

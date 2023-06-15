@@ -283,7 +283,7 @@
   .user-menu .user-dropdown {
     position: absolute;
     top: calc(100% + 8px);
-    right: 0;
+    right: 1.5vw;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;

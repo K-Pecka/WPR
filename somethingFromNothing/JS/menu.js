@@ -9,6 +9,7 @@ var getData = () => {
         break;
       case 'recipe.php':
         getRecipesForId(id);
+        getRecipesComments(id);
         break;
       case 'addRecipe.php':
         document.querySelector('#addIngridient').addEventListener('click', getIngredient);

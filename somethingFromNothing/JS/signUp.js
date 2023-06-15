@@ -33,5 +33,5 @@ var signUp = (e) => {
   formData.append('url',window.href);
 
   console.log(formData);
-  register(formData);
+  register(formData,formFeedback);
 }

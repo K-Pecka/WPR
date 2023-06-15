@@ -10,6 +10,7 @@ if (!isset($_SESSION['id'])) {
   header('Location: /');
 }
 require_once '../service/user.php';
+require_once '../service/function.php';
 $user = getUser();
 if (isset($user['image'])) $user['image'] = '';
 ?>
@@ -68,6 +69,7 @@ if (isset($user['image'])) $user['image'] = '';
 
       <section id="user-section-2" class="user-section">
         <h3>Ulubione</h3>
+        <?php echo checkRole($_SESSION['id'], 'admin') ?>
         <!-- Zawartość sekcji "Ulubione" -->
       </section>
 

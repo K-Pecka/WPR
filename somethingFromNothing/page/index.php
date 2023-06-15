@@ -68,8 +68,7 @@ if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 			</section>
 
 		</main>
-		<?php var_dump($_SESSION);
-		echo $footer; ?>
+		<?php echo $footer; ?>
 	</body>
 
 	</html>

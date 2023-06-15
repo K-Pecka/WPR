@@ -35,12 +35,11 @@ if (isset($_POST['nickName']) && isset($_POST['email']) && isset($_POST['passwor
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $pdo->prepare("INSERT INTO user (nickName, email, pass) VALUES (?, ?, ?)");
             $stmt->execute([$nickname, $email, $hashedPassword]);
-            if (isset($_POST['url'])) {
-                setSignUp($pdo->lastInsertId());
-                exit();
-            }
             http_response_code(200);
             $success = ['success' => 'Użytkownik został dodany.'];
+            setSignUp($pdo->lastInsertId());
+            echo json_encode($success);
+            exit();
         }
 
         echo json_encode($error);

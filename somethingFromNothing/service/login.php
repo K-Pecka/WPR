@@ -18,12 +18,12 @@ if (isset($_POST['login']) && isset($_POST['pass'])) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($password, $user['pass'])) {
-            $response = ['success' => true, 'message' => 'Logowanie udane'];
+            $response = ['success'  => 'Logowanie udane'];
             setSignUp($user['id']);
             echo json_encode($response);
         } else {
             // Błędne dane logowania
-            $response = ['success' => false, 'message' => 'Nieprawidłowa nazwa użytkownika lub hasło'];
+            $response = ['error' => 'Nieprawidłowa nazwa użytkownika lub hasło'];
             echo json_encode($response);
         }
     } catch (PDOException $e) {
