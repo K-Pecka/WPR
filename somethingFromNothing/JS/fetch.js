@@ -38,7 +38,7 @@ var displayRecipe = (el) => {
         return;
       }
   
-      var response = await fetch('../service/getRecipes.php');
+      var response = await fetch('../service/recipe/getRecipes.php');
       var data = await response.json();
   
       data.map((el) => {
@@ -63,7 +63,7 @@ var displayRecipe = (el) => {
   
   var getRecipesForId = async (id) => {
     try {
-      var response = await fetch('../service/getRecipeId.php?' + id);
+      var response = await fetch('../service/recipe/getRecipeId.php?' + id);
       var data = await response.json();
   
       if (typeof Handlebars === 'undefined') {
@@ -85,7 +85,7 @@ var displayRecipe = (el) => {
   
 
   var getIngredient = () => {
-    fetch('../service/getIngridient.php')
+    fetch('../service/recipe/getIngridient.php')
       .then(response => response.json())
       .then(data => {
         if (typeof Handlebars == 'undefined') {
@@ -121,7 +121,7 @@ var displayRecipe = (el) => {
   
    var register = (formData,feedBack) =>{
     console.log(formData);
-    fetch("../service/register.php", {
+    fetch("../service/user/register.php", {
       method: "POST",
       body: formData
     })
@@ -145,7 +145,7 @@ var displayRecipe = (el) => {
   };
   var logIn = (formData) =>{
     console.log(formData);
-    fetch("../service/login.php", {
+    fetch("../service/user/login.php", {
       method: "POST",
       body: formData
     })
@@ -168,7 +168,7 @@ var displayRecipe = (el) => {
   };
   var logOut = () =>
   {
-    fetch("../service/logOut.php");
+    fetch("../service/user/logOut.php");
     location.reload();
   }
   var getRecipesComments = async (id) => {
@@ -191,3 +191,16 @@ var displayRecipe = (el) => {
       console.error('Błąd pobierania danych:', error);
     }
   };
+  var setLang = (param) =>{
+    fetch("../service/user/setLang.php?"+param.toString())
+    .then(json => {
+      if(!json.error)
+      {
+        location.reload();
+      }
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  }

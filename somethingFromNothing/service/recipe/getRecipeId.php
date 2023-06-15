@@ -1,5 +1,5 @@
 <?php
-$config = json_decode(file_get_contents('../config/config.json'));
+$config = json_decode(file_get_contents('../../config/config.json'));
 class Recipe
 {
     private $title;

@@ -258,7 +258,11 @@
     display: block;
   }
   
-
+.icon.icon-min
+{
+  width: 1em;
+  height: 1em;
+}
 
 
 

@@ -102,5 +102,12 @@ if(document.querySelector('.userMenu'))
   }
 });
 document.querySelector('.LogOut').addEventListener('click',logOut);
+console.log(document.querySelector('.user-dropdown select'));
+document.querySelector('.user-dropdown select').addEventListener('change',(e)=>
+  {
+    const params = new URLSearchParams();
+    params.append('lang', e.target.value);
+    setLang(params);
+  })
 }
 

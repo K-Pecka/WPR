@@ -1,8 +1,7 @@
 <?php
 session_start();
-$config = json_decode(file_get_contents('../config/config.json'));
+require_once '../module/setPage.php';
 
-require_once '../module/html.php';
 if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 	header('Location: error.php');
 }
