@@ -5,11 +5,21 @@ var getData = () => {
     switch (currentURL) {
       case '':
       case 'index.php':
-        getRecipes();
+        getRecipes('');
+        break;
+      case 'userRecipe.php':
+        getRecipes('status');
+        break;
+      case 'favorite.php':
+        getRecipes('favorite');
+        setTimeout(() => {
+         setFavorite();
+        }, 1000);
         break;
       case 'recipe.php':
         getRecipesForId(id);
         getRecipesComments(id);
+        getUser(id);
         break;
       case 'addRecipe.php':
         document.querySelector('#addIngridient').addEventListener('click', getIngredient);

@@ -2,10 +2,6 @@
 session_start();
 require_once '../module/setPage.php';
 
-if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
-	header('Location: error.php');
-}
-
 ?>
 <DOCTYPE html>
 	<html>
@@ -20,6 +16,7 @@ if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 		<main id="content">
 			<header>
 				<?php echo $header ?>
+
 			</header>
 			<section id="recipe">
 
@@ -28,13 +25,11 @@ if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 				<section id="comment">
 					<h2>Comments</h2>
 					<form id="comment-form" method="POST">
-						<div>
-							<label for="name">Name:</label>
-							<input type="text" id="name" name="name" required>
+						<div class="comment-author">
+							<img class="comment-avatar" src="{{avatar}}" alt="User Avatar">
+							<h4></h4>
 						</div>
-						<div>
-							<label for="content">Content:</label>
-							<textarea id="content" name="content" required></textarea>
+						<textarea id="content" name="content" required></textarea>
 						</div>
 						<div>
 							<button type="submit">Add Comment</button>
@@ -45,16 +40,11 @@ if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
 					</div>
 				</section>
 				<section id="recommended">
-					coś
+
 				</section>
 			</section>
 
 		</main>
-		<script src="https://cdn.jsdelivr.net/npm/handlebars@4.7.7/dist/handlebars.min.js"></script>
-		<script src="../JS/fetch.js"></script>
-		<script src="../JS/dark-mode.js"></script>
-		<script src="../JS/nav.js"></script>
-		<script src="../JS/menu.js"></script>
 		<?php echo $footer; ?>
 	</body>
 

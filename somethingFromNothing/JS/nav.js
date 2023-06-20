@@ -109,3 +109,6 @@ document.querySelector('.user-dropdown select').addEventListener('change',(e)=>
     setLang(params);
   });
 }
+
+document.querySelector('.nav-search-btn').addEventListener('click',
+()=>getRecipes('phrase='+document.querySelector('#nav-search').value));

@@ -1,13 +1,6 @@
 <?php
 session_start();
 require_once '../module/setPage.php';
-
-if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
-	header('Location: error.php');
-}
-if (!isset($_SESSION['id'])) {
-	header('Location: /');
-}
 ?>
 <DOCTYPE html>
 	<html>
@@ -116,6 +109,7 @@ if (!isset($_SESSION['id'])) {
 						</ul>
 						<button id="addPreparation" class="open-modal-btn-preparation">dodaj składnik</button>
 					</div>
+					<button id="addRecipe">Dodaj Przepis</button>
 				</div>
 			</section>
 		</main>

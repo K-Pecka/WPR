@@ -1,7 +1,9 @@
 <?php
+session_start();
 function getImage($id)
 {
-    if (($handle = fopen('../data/user.csv', 'r')) !== false) {
+    $found_images = 'random.jpg';
+    if (($handle = fopen('../../data/user.csv', 'r')) !== false) {
         while (($data = fgetcsv($handle, 0, ';')) !== false) {
             if ($data[2] == $id) {
                 $found_images = $data[3];
@@ -12,9 +14,9 @@ function getImage($id)
 
     return $found_images;
 }
-function getUser()
+function getUser($json = null)
 {
-    $config = json_decode(file_get_contents('../config/config.json'));
+    $config = json_decode(file_get_contents('../../config/config.json'));
     if (!isset($_SESSION['id'])) exit();
     $id = $_SESSION['id'];
     try {
@@ -24,8 +26,14 @@ function getUser()
         $statement = $pdo->prepare($query);
         $statement->execute([$id]);
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return ['user'=>$data[0], 'img' => getImage($id)];
+        if ($json == 'json') return json_encode(['user' => $data[0], 'image' => getImage($id)]);
+        return ['user' => $data[0], 'img' => getImage($id)];
     } catch (PDOException $e) {
         echo json_encode(['error' => 'Database connection error: ' . $e->getMessage()]);
     }
+}
+if (isset($_SESSION['id'])) {
+    echo getUser('json');
+} else {
+    echo json_encode(['error' => 'authorization problem']);
 }

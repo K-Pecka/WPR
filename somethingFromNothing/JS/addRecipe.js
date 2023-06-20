@@ -39,3 +39,28 @@ fileInput.addEventListener('change', function(event) {
   // Odczytaj zawartość pliku jako dane URL
   reader.readAsDataURL(file);
 });
+
+document.querySelector('#addRecipe').addEventListener('click',()=>{
+  var formData = new FormData();
+  var title = document.querySelector('input[name="title"]').value;
+  var description = document.querySelector('.addToAddDescription').innerHTML;
+  var ingridents=[];
+  var tr = [...document.querySelectorAll('table.ingredients tr')];
+  var li = [...document.querySelectorAll('ul.instruction li')];
+  console.log(tr);
+  for(i=0;i<tr.length;i++)
+  {
+    var td = [...tr[i].querySelectorAll('td')];
+    var ingredient = {};
+    ingredient.name = td[0].innerHTML;
+    ingredient.unite= td[1].querySelector('input').value;
+    ingredient.value = td[2].querySelector('select').value;
+    ingridents.push(ingredient);
+  }
+
+  if(title == '' || description=='' || ingridents.length == 0)
+  {
+    console.log("blocked");
+  }  
+    console.log(title,description,ingridents);
+});

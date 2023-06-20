@@ -26,21 +26,22 @@ var displayRecipe = (el) => {
       .then(response => response.text());
   }
   
-  var getRecipes = async () => {
+  var getRecipes = async (status) => {
     try {
       var templateSource = await getTemp('recipe.html');
       var templateElement = parseHTML(templateSource);
-  
-      console.log(templateElement);
-  
       if (typeof Handlebars === 'undefined') {
-        document.querySelector("#recipes").innerHTML = "Błąd Servera 500";
+        
+        var response = await fetch('../service/config/error.php?errorServer=true');
+        var data = await response.json();
+        document.querySelector("#recipes").innerHTML = 
+        `<div class='errorServer'>
+          <h2>`+data.error.h2+`</h2>
+        </div>`;
         return;
       }
-  
-      var response = await fetch('../service/recipe/getRecipes.php');
+      var response = await fetch('../service/recipe/getRecipes.php?'+status);
       var data = await response.json();
-      if(data.error)console.log(data.error);
       data.map((el) => {
         el.rating = '★'.repeat(el.rating).padEnd(5, '☆').split('');
         el.time = el.time === null ? 0 : el.time;
@@ -51,7 +52,18 @@ var displayRecipe = (el) => {
       data.forEach(function (recipe) {
         html += template(recipe);
       });
-      document.querySelector("#recipes").innerHTML += html;
+      if(html == "")
+      {
+        var response = await fetch('../service/config/error.php?noData=true');
+        var data = await response.json();
+        document.querySelector("#recipes").innerHTML = 
+        `<div class='errorServer'>
+        <h2>`+data.error.h2+`</h2>
+        <p>`+data.error.p+`</p>
+        </div>`;
+        return;
+      }
+      document.querySelector("#recipes").innerHTML = html;
       document.querySelectorAll('.recipe').forEach((el) => {
         el.addEventListener('click', () => displayRecipe(el));
       });
@@ -195,6 +207,54 @@ var displayRecipe = (el) => {
       {
         location.reload();
       }
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  }
+  var deleteFavorite = (id)=>
+  {
+    fetch("../service/recipe/deleteFavorite.php?recipe="+id)
+    .then(response => response.text())
+    .then(json => {
+      if(!json.error)
+      {
+        console.log(json);
+      }
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  }
+  var getUser = (id) =>
+  {
+    commentForm(id);
+    fetch("../service/user/user.php")
+    .then(response => response.json())
+    .then(json => {
+      if(!json.error)
+      {
+        console.log(json);
+        document.querySelector('.comment-author h4').innerHTML=json.user.nickName;
+        document.querySelector('.comment-author img').src='../image/public/user/'+json.image;
+      }
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  }
+  var addComment = (formData) =>
+  {
+    fetch("../service/recipe/addRecipeComment.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(json => {
+      getRecipesComments(json.id);
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);

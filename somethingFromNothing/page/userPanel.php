@@ -1,18 +1,6 @@
 <?php
 session_start();
-$config = json_decode(file_get_contents('../config/config.json'));
-
-require_once '../module/html.php';
-if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
-  header('Location: error.php');
-}
-if (!isset($_SESSION['id'])) {
-  header('Location: /');
-}
-require_once '../service/user.php';
-require_once '../service/function.php';
-$user = getUser();
-if (isset($user['image'])) $user['image'] = '';
+require_once '../module/setPage.php';
 ?>
 <DOCTYPE html>
   <html>

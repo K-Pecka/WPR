@@ -1,10 +1,6 @@
 <?php
 session_start();
 require_once '../module/setPage.php';
-
-if (!isset($nav) || !isset($head) || !isset($footer) || !isset($footer)) {
-	header('Location: error.php');
-}
 ?>
 <DOCTYPE html>
 	<html>

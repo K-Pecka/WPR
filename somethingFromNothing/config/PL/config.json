@@ -14,6 +14,15 @@
     "addRecipePath":"../page/addRecipe.php",
     "headPath":"./somethingFromNothing/include/head.php"
   },
+  "error":{
+    "noData":{
+      "h2":"Przepraszamy aktualnie nie posiadamy żadnego przepisu",
+      "p": "Zapraszamy w przyszłości!"
+    },
+    "errorServer":{
+      "h2":"Błąd Servera 502"
+    }
+  },
   "HTML":{
     "h1": "Kulinarna Magia z Kliku składników",
     "header": [
@@ -23,6 +32,15 @@
       "placeholder":"Wciśnij Enter, aby odnaleźć przepis lub #, aby pokazać wszystkie przepisy",
       "button":{"title": "szukaj"}
     },
-    "login":"Zaloguj się"
+    "login":"Zaloguj się",
+    "footer":
+    {
+        "©":"Wszelkie prawa zastrzeżone",
+        "a":[
+          {"href":"#","content":"Polityka prywatności"},
+          {"href":"#","content":"Regulamin"},
+          {"href":"#","content":"Kontatk"}
+        ]
+    }
   }
 }

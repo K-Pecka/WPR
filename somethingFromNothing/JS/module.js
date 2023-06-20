@@ -64,11 +64,11 @@ ingridient.addEventListener('click', () => {
   var html = "";
   input.forEach(el=>html +=
     `<tr><td>`+el.dataset.name+`</td>
-      <td><input></td>
+      <td><input name='unite'></td>
       <td>
         <select>
-          <option>KG</option>
-          <option>MIL</option>
+          <option value='1'>KG</option>
+          <option value='2'>MIL</option>
         </select>
       </td>
     </tr>`);
@@ -78,7 +78,7 @@ ingridient.addEventListener('click', () => {
 var openBtnPreparation = document.querySelector('#addPreparation');
 var modalPreparation = document.getElementById('modalPreparation');
 var closeBtnPreparation = document.getElementsByClassName('close')[2];
-var preparation = document.querySelector('.addToAdd');
+var preparation = document.querySelector('#modalPreparation .addToAdd-btn');
 
 function openModalP() {
   setTimeout(function() {
@@ -97,12 +97,16 @@ closeBtnPreparation.addEventListener('click', closeModalP);
 
 preparation.addEventListener('click', () => {
   closeModalP();
+  console.log("przygotowanie");
   openBtnPreparation.innerHTML = "Edytuj składniki";
-  var input = [...modalPreparation.querySelectorAll('input')].filter(el=>el.checked);
+  var input = [...modalPreparation.querySelectorAll('li')].filter(el=>el.querySelector('textarea').value != '' && el.querySelector('input').value != '');
   var html = "";
-  input.forEach(el=>html +=``);
-  document.querySelector('.instruction').innerHTML = html;
+  input.forEach(el=>html +="<li><p>"+el.querySelector('textarea').value+"</p><span>"+el.querySelector('input').value+"</span></li>");
+  console.log(document.querySelector('.instruction'),html);
+  document.querySelector('ul.instruction').innerHTML = html;
 });
+
+
 var list = modalPreparation.querySelector('ol');
 var checkEmpty = (e) => {
   if(e.target.nodeName.toLowerCase() === 'input')return;

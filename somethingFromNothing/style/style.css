@@ -5,8 +5,30 @@
   
   --background-color-dark: #1f1f1f;
   --text-color-dark: #ffffff;
-}
 
+  --color-error-light:#443f3f;
+  --color-error-dark:#b8b7b7;
+}
+.errorServer
+{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 10vh;
+  flex-direction: column;
+}
+body.dark-mode .errorServer :is(p,h2)
+{
+  color:var(--color-error-dark);
+}
+.errorServer p,h2
+{
+  font-size: 2em;
+  color:var(--color-error-light);
+  text-align: center;
+}
 body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--background-color-light);
@@ -35,7 +57,7 @@ body.dark-mode h1
   background-color: #333333;
   color: #ffffff;
 }
-body.dark-mode p
+body.dark-mode :is(p,a)
 {
   color: #888;
 }

@@ -1,10 +1,22 @@
 <?php
-$config = json_decode(file_get_contents("../config/config.json"));
-if (isset($_COOKIE['lang']) && file_exists("../config/" . $_COOKIE['lang'] . "/config.json")) {
-    $config = json_decode(file_get_contents("../config/" . $_COOKIE['lang'] . "/config.json"));
-}
+require_once 'setLang.php';
+
 $HTML = $config->HTML;
+
 require_once 'footer.php';
 require_once 'nav.php';
 require_once 'head.php';
 require_once 'header.php';
+
+if (!isset($nav) || !isset($head) || !isset($footer)) {
+    header('Location: ./error.php');
+}
+
+$path = explode('/', $_SERVER['PHP_SELF']);
+$file = end($path);
+
+$public = array('index.php', 'recipe.php');
+
+if (!in_array($file, $public) && !isset($_SESSION['id'])) {
+    header('Location: ./');
+}

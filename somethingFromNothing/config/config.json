@@ -14,6 +14,15 @@
     "addRecipePath":"../page/addRecipe.php",
     "headPath":"./somethingFromNothing/include/head.php"
   },
+  "error":{
+    "noData":{
+      "h2":"Sorry, we currently don't have any recipe",
+      "p": "Welcome in the future!"
+    },
+    "errorServer":{
+      "h2":"Server error 502"
+    }
+  },
   "HTML":{
     "h1": "Culinary Magic with Few Ingredients",
     "header": [
@@ -23,6 +32,15 @@
       "placeholder":"Press Enter to find a recipe or # to show all recipes",
       "button":{"title": "search"}
     },
-    "login":"Log in"
+    "login":"Log in",
+    "footer":
+    {
+        "©":"All rights reserved",
+        "a":[
+          {"href":"#","content":"privacy policy"},
+          {"href":"#","content":"regulations"},
+          {"href":"#","content":"contact"}
+        ]
+    }
   }
 }

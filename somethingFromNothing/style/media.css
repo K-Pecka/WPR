@@ -24,6 +24,10 @@
 	  left: 0;
 	  width: 100%;
 	}
+	#title
+	{
+		display: none;
+	}
   }
   @media (max-width: 768px) {
   #addIngredients {
