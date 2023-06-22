@@ -21,6 +21,17 @@
     },
     "errorServer":{
       "h2":"Server error 502"
+    },
+    "notFound":{
+      "h2":"Not found recipe",
+      "a":{
+        "href":"./",
+        "content":"back to home page"
+      }
+    },
+    "authorization":{
+      "noSession":"please login to view this content",
+      "noPermissions":"No access to this content"
     }
   },
   "HTML":{
@@ -41,6 +52,10 @@
           {"href":"#","content":"regulations"},
           {"href":"#","content":"contact"}
         ]
+    },
+    "cookies":{
+      "p":"This site uses cookies. By using it, you consent to their use.",
+      "button":"I understand"
     }
   }
 }

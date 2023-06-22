@@ -1,4 +1,6 @@
-var toggleCheckbox = document.querySelector('.toggle-checkbox');
+if(document.querySelector('.toggle-checkbox'))
+{
+  var toggleCheckbox = document.querySelector('.toggle-checkbox');
 
 window.addEventListener('load', function() {
   const darkModeEnabled = localStorage.getItem('darkModeEnabled');
@@ -18,3 +20,5 @@ toggleCheckbox.addEventListener('change', function() {
     document.body.classList.remove('dark-mode');
   }
 });
+}
+

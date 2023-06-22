@@ -1,6 +1,6 @@
 <?php
 session_start();
-$config = json_decode(file_get_contents('../config/config.json'));
+$config = json_decode(file_get_contents('../../config/config.json'));
 require_once 'function.php';
 if (isset($_POST['nickName']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['passwordVerification'])) {
     try {

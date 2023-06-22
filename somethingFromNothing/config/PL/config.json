@@ -21,6 +21,17 @@
     },
     "errorServer":{
       "h2":"Błąd Servera 502"
+    },
+    "notFound":{
+      "h2":"Nie znaleziono takiego przepisu",
+      "a":{
+        "href":"./",
+        "content":"powrót na stronę główną"
+      }
+    },
+    "authorization":{
+      "noSession":"Prosimy zaloguj się, aby zobaczyć tamtą treść.",
+      "noPermissions":"Przepraszamy, ale nie masz uprawnień do tej sekcji"
     }
   },
   "HTML":{
@@ -41,6 +52,10 @@
           {"href":"#","content":"Regulamin"},
           {"href":"#","content":"Kontatk"}
         ]
+    },
+    "cookies":{
+      "p":"Ta witryna używa plików cookie. Korzystając z niej, wyrażasz zgodę na ich użycie.",
+      "button":"Rozumiem"
     }
   }
 }

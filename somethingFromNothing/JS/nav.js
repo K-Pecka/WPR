@@ -1,10 +1,23 @@
-var menuToggle = document.getElementById('menu-toggle');
+if(document.getElementById('menu-toggle'))
+{
+  var menuToggle = document.getElementById('menu-toggle');
+  menuToggle.addEventListener('click', () => {
+  menuCheckbox.checked = !menuCheckbox.checked;
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var checkbox = document.getElementById('menu-checkbox');
+    checkbox.addEventListener('click', function() {
+      var dropdownMenu = document.getElementById('dropdown-menu');
+      dropdownMenu.style.display = checkbox.checked ? 'block' : 'none';
+    });
+  });
+}
+
 var menuCheckbox = document.getElementById('menu-checkbox');
 var banner = document.querySelector('#banner');
 
-menuToggle.addEventListener('click', () => {
-  menuCheckbox.checked = !menuCheckbox.checked;
-});
+
 
 var prevScrollPos = window.pageYOffset;
 
@@ -46,7 +59,10 @@ function showLoginPopup() {
         message.classList.add("login");
       }
     );
-    console.log(document.querySelector('.container .form--signup form'));
+    document.querySelector('.closeLog').addEventListener('click',()=>{
+      document.querySelector('#login-content .container').innerHTML = "";
+      document.getElementById('login-popup').style.display = 'none';
+    });
     document.querySelector('.container .form--signup form').addEventListener('submit',(e)=>{
       e.preventDefault();
       signUp(e);
@@ -67,14 +83,6 @@ function hideLoginPopup() {
 
 banner.addEventListener('click',displayIndex);
 
-
-document.addEventListener('DOMContentLoaded', function() {
-  var checkbox = document.getElementById('menu-checkbox');
-  checkbox.addEventListener('click', function() {
-    var dropdownMenu = document.getElementById('dropdown-menu');
-    dropdownMenu.style.display = checkbox.checked ? 'block' : 'none';
-  });
-});
 
 
 function toggleUserMenu() {
@@ -109,6 +117,8 @@ document.querySelector('.user-dropdown select').addEventListener('change',(e)=>
     setLang(params);
   });
 }
-
-document.querySelector('.nav-search-btn').addEventListener('click',
+if(document.querySelector('.nav-search-btn'))
+{
+  document.querySelector('.nav-search-btn').addEventListener('click',
 ()=>getRecipes('phrase='+document.querySelector('#nav-search').value));
+}

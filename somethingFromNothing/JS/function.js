@@ -41,5 +41,4 @@ var commentForm = (id) =>
         formData.append('id_recipe',recipe);
         addComment(formData);
     });
-    console.log(form);
 }

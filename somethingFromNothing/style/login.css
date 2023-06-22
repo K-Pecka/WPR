@@ -3,8 +3,7 @@
 
 body,
 .message,
-.form
-{
+.form {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,13 +11,45 @@ body,
 }
 
 .container {
-  width: 700px;
+  max-width: 700px;
   height: 400px;
   background: white;
   position: relative;
   display: grid;
   grid-template: 100% / 50% 50%;
   box-shadow: 2px 2px 10px 0 rgba(#333, 0.2);
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template: auto / 100%;
+    height: auto;
+  }
+
+  .message {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: translateX(0);
+  }
+
+  .form {
+    display: none;
+  }
+
+  .form--login,
+  .form--signup {
+    display: block;
+  }
+
+  .button-toggle {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    z-index: 5;
+  }
 }
 
 .message {
@@ -115,6 +146,22 @@ form input:focus {
   font-weight: 400;
   position: relative;
   z-index: 3;
+  background: #129D72;
+  font-family: "Source Sans Pro", sans-serif;
+  cursor: pointer;
+}
+
+.button-toggle {
+  width: 150px;
+  height: 30px;
+  border: 0;
+  outline: 0;
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background: #129D72;
   font-family: "Source Sans Pro", sans-serif;
   cursor: pointer;

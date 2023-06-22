@@ -1,4 +1,5 @@
 <div class="container">
+  <span class="closeLog">&times;</span>
   <div class="message signup">
     <div class="btn-wrapper">
       <button class="button" id="signup">Sign Up</button>
@@ -30,3 +31,37 @@
     <div class="form-feedback"></div>
   </div>
 </div>
+<script>
+  const signupButton = document.getElementById('signup');
+  const loginButton = document.getElementById('login');
+  const formSignup = document.querySelector('.form--signup');
+  const formLogin = document.querySelector('.form--login');
+
+  function handleWindowSizeChange() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 768) {
+      formSignup.style.display = 'none';
+      formLogin.style.display = 'block';
+    } else {
+      formSignup.style.display = 'block';
+      formLogin.style.display = 'block';
+    }
+  }
+
+  signupButton.addEventListener('click', () => {
+    formSignup.style.display = 'block';
+    formLogin.style.display = 'none';
+  });
+
+  loginButton.addEventListener('click', () => {
+    formSignup.style.display = 'none';
+    formLogin.style.display = 'block';
+  });
+
+  // Obsługa zmiany rozmiaru okna
+  window.addEventListener('resize', handleWindowSizeChange);
+
+  // Wywołanie funkcji przy załadowaniu strony
+  handleWindowSizeChange();
+</script>

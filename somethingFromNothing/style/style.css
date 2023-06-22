@@ -155,7 +155,20 @@ h2 {
   text-overflow: ellipsis; 
   text-align: justify;
 }
-
+.closeLog
+{
+  position: fixed;
+  top:-2em;
+  right: -2em;
+  font-size: 2em;
+  cursor: pointer;
+  z-index: 10;
+  background-color: rgb(204, 204, 204);
+  border-radius: 50%;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+}
 #recipes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -301,4 +314,77 @@ h2 {
   background-color: #e3e3e3;
   cursor: pointer;
   transform: scale(1.01);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#cookie-banner {
+  position: fixed;
+  bottom: -100px; /* Baner jest ukryty poza obszarem widocznym */
+  left: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  transition: bottom 0.5s; /* Animacja pojawiania się i chowania */
+}
+
+#cookie-banner.show {
+  bottom: 0; /* Baner pojawia się na ekranie */
+}
+
+#cookie-message {
+  margin: 0;
+}
+
+#cookie-accept {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#cookie-accept:hover {
+  background-color: #45a049;
+}
+
+
+
+#error-banner {
+  position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  max-width: 400px;
+  background-color: #f44336;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: bold;
+  transition: top 0.5s ease-out;
+  z-index: 9999;
+  border-radius: 8px;
+}
+
+#error-banner.slide-in {
+  top: 10%;
+}
+
+#error-banner.slide-out {
+  top: -10%;
 }

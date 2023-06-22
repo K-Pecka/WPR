@@ -63,7 +63,11 @@ require_once '../module/setPage.php';
 			</section>
 
 		</main>
-		<?php echo $footer; ?>
+		<?php
+		echo $footer;
+		echo $banner;
+		echo $errorBannner;
+		?>
 	</body>
 
 	</html>

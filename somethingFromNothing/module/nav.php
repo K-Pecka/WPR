@@ -66,7 +66,7 @@ $result = $pdo->query("SELECT `initials` as 'lang' FROM `lang`");
 $langDb = $result->fetchAll(PDO::FETCH_ASSOC);
 $lang = '';
 foreach ($langDb as $language) {
-  $lang .= "<option value='" . $language['lang'] . "'" . ($language['lang'] == $_COOKIE['lang'] ? "selected" : "") . ">" . $language['lang'] . "</option>";
+  $lang .= "<option value='" . $language['lang'] . "'" . ($language['lang'] == isset($_COOKIE['lang']) && $_COOKIE['lang'] ? "selected" : "") . ">" . $language['lang'] . "</option>";
 }
 $userMenu  = str_replace("{{LANG}}", $lang, $userMenu);
 $nav = str_replace("{{SEARCH}}", $search, $nav);

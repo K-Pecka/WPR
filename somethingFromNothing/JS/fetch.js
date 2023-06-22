@@ -30,29 +30,9 @@ var displayRecipe = (el) => {
     try {
       var templateSource = await getTemp('recipe.html');
       var templateElement = parseHTML(templateSource);
-      if (typeof Handlebars === 'undefined') {
-        
-        var response = await fetch('../service/config/error.php?errorServer=true');
-        var data = await response.json();
-        document.querySelector("#recipes").innerHTML = 
-        `<div class='errorServer'>
-          <h2>`+data.error.h2+`</h2>
-        </div>`;
-        return;
-      }
       var response = await fetch('../service/recipe/getRecipes.php?'+status);
       var data = await response.json();
-      data.map((el) => {
-        el.rating = '★'.repeat(el.rating).padEnd(5, '☆').split('');
-        el.time = el.time === null ? 0 : el.time;
-      });
-  
-      var template = Handlebars.compile(templateElement.innerHTML);
-      var html = "";
-      data.forEach(function (recipe) {
-        html += template(recipe);
-      });
-      if(html == "")
+      if(data == "")
       {
         var response = await fetch('../service/config/error.php?noData=true');
         var data = await response.json();
@@ -63,6 +43,27 @@ var displayRecipe = (el) => {
         </div>`;
         return;
       }
+      if (typeof Handlebars === 'undefined') {
+        
+        var response = await fetch('../service/config/error.php?errorServer=true');
+        var data = await response.json();
+        document.querySelector("#recipes").innerHTML = 
+        `<div class='errorServer'>
+          <h2>`+data.error.h2+`</h2>
+        </div>`;
+        return;
+      }
+      data.map((el) => {
+        el.rating = '★'.repeat(el.rating).padEnd(5, '☆').split('');
+        el.time = el.time === null ? 0 : el.time;
+      });
+  
+      var template = Handlebars.compile(templateElement.innerHTML);
+      var html = "";
+      data.forEach(function (recipe) {
+        html += template(recipe);
+      });
+      
       document.querySelector("#recipes").innerHTML = html;
       document.querySelectorAll('.recipe').forEach((el) => {
         el.addEventListener('click', () => displayRecipe(el));
@@ -77,16 +78,36 @@ var displayRecipe = (el) => {
     try {
       var response = await fetch('../service/recipe/getRecipeId.php?' + id);
       var data = await response.json();
-      if (typeof Handlebars === 'undefined') {
-        document.querySelector("#recipe").innerHTML = "Błąd Servera 500";
+      if(data.error)
+      {
+        var response = await fetch('../service/config/error.php?notFound=true');
+        var data = await response.json();
+        document.querySelector("#recipe").innerHTML = 
+        `<div class='errorServer'>
+        <h2>`+data.error.h2+`</h2>
+        <p><a href="`+data.error.a.href+`">`+data.error.a.content+`</a></p>
+        </div>`;
+        document.querySelector("#comment").remove();
+        document.querySelector("#recommended").remove();
         return;
       }
+      if (typeof Handlebars === 'undefined') {
+        var response = await fetch('../service/config/error.php?errorServer=true');
+        var data = await response.json();
+        document.querySelector("#recipe").innerHTML = 
+        `<div class='errorServer'>
+          <h2>`+data.error.h2+`</h2>
+        </div>`;
+        return;
+      }
+
       data.rating = '★'.repeat(data.rating).padEnd(5, '☆').split('');
       var templateSource = await getTemp('recipeById.html');
       var templateElement = parseHTML(templateSource);
       var recipeTemplate = Handlebars.compile(templateElement.innerHTML);
       var recipeContainer = document.getElementById("recipe");
       var recipeHTML = recipeTemplate(data);
+      
       recipeContainer.innerHTML = recipeHTML;
     } catch (error) {
       console.error('Błąd pobierania danych:', error);
@@ -261,3 +282,84 @@ var displayRecipe = (el) => {
       console.log(error);
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+if(document.getElementById('cookie-accept'))
+{
+  document.addEventListener('DOMContentLoaded', function() {
+    const cookieBanner = document.getElementById('cookie-banner');
+    const cookieAcceptButton = document.getElementById('cookie-accept');
+  
+    // Funkcja do ukrywania banera
+    function hideCookieBanner() {
+      cookieBanner.classList.remove('show');
+    }
+  
+    // Funkcja do pokazywania banera
+    function showCookieBanner() {
+      cookieBanner.classList.add('show');
+    }
+  
+    // Funkcja do obsługi kliknięcia przycisku zaakceptowania plików cookie
+    function handleCookieAccept() {
+      // Wykonaj żądanie Fetch, aby zaktualizować stan zaakceptowania plików cookie na serwerze
+      fetch('../service/config/setCookies.php')
+      .then(function(response) {
+        if (response.ok) {
+          // Pomyślnie zaktualizowano stan zaakceptowania plików cookie
+          // Ukryj baner
+          hideCookieBanner();
+        } else {
+          console.error('Error:', response.status);
+        }
+      })
+      .catch(function(error) {
+        console.error('Error:', error);
+      });
+    }
+  
+    // Dodaj obsługę kliknięcia przycisku zaakceptowania plików cookie
+    cookieAcceptButton.addEventListener('click', handleCookieAccept);
+  
+    // Sprawdź, czy użytkownik już zaakceptował pliki cookie
+    const cookieAccepted = document.cookie.indexOf('cookie_accepted') !== -1;
+    if (cookieAccepted) {
+      // Ukryj baner, jeśli pliki cookie zostały zaakceptowane
+      hideCookieBanner();
+    } else {
+      // Pokaż baner z animacją, jeśli pliki cookie nie zostały jeszcze zaakceptowane
+      showCookieBanner();
+    }
+  });
+}
+if(errorBanner = document.getElementById('error-banner'))
+{
+document.addEventListener('DOMContentLoaded', function() {
+  const errorBanner = document.getElementById('error-banner');
+
+  // Pokaż div i uruchom animację zjeżdżania
+  errorBanner.classList.add('slide-in');
+
+  // Znikanie po 5 sekundach
+  setTimeout(function() {
+    errorBanner.classList.add('slide-out');
+  }, 5000);
+
+  // Usuń div po zakończeniu animacji znikania
+  errorBanner.addEventListener('transitionend', function(event) {
+    if (event.propertyName === 'top' && errorBanner.classList.contains('slide-out')) {
+      errorBanner.style.display = 'none';
+    }
+  });
+});
+}

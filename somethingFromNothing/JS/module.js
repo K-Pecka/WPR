@@ -16,6 +16,7 @@ function closeModal() {
 }
 
 openBtnDescription.addEventListener('click', openModal);
+document.querySelector('.addToAddDescription').addEventListener('click', openModal);
 closeBtnDescription.addEventListener('click', closeModal);
 
 description.addEventListener('click', () => {
@@ -23,7 +24,6 @@ description.addEventListener('click', () => {
   openBtnDescription.innerHTML = "Edytuj opis";
   document.querySelector('.addToAddDescription').innerHTML = modalDescription.querySelector('textarea').value;
 });
-
 
 var setChecked = () =>{
   [...modalIngridient.querySelectorAll('input[type=checkbox]')].forEach(el=>{
@@ -63,15 +63,15 @@ ingridient.addEventListener('click', () => {
   var input = [...modalIngridient.querySelectorAll('input')].filter(el=>el.checked);
   var html = "";
   input.forEach(el=>html +=
-    `<tr><td>`+el.dataset.name+`</td>
-      <td><input name='unite'></td>
-      <td>
+    `<div><span>`+el.dataset.name+`</span>
+      <div><input name='unite'></div>
+      <div>
         <select>
           <option value='1'>KG</option>
           <option value='2'>MIL</option>
         </select>
-      </td>
-    </tr>`);
+      </div>
+    </div>`);
   document.querySelector('.ingredients table').innerHTML = html;
 });
 
@@ -101,7 +101,7 @@ preparation.addEventListener('click', () => {
   openBtnPreparation.innerHTML = "Edytuj składniki";
   var input = [...modalPreparation.querySelectorAll('li')].filter(el=>el.querySelector('textarea').value != '' && el.querySelector('input').value != '');
   var html = "";
-  input.forEach(el=>html +="<li><p>"+el.querySelector('textarea').value+"</p><span>"+el.querySelector('input').value+"</span></li>");
+  input.forEach(el=>html +="<li><p>"+el.querySelector('textarea').value+"</p><span>"+el.querySelector('input').value+"</span> min</li>");
   console.log(document.querySelector('.instruction'),html);
   document.querySelector('ul.instruction').innerHTML = html;
 });

@@ -11,3 +11,6 @@ if (isset($_GET['noData'])) {
 if (isset($_GET['errorServer'])) {
     echo json_encode(["error" => $config->error->errorServer]);
 }
+if (isset($_GET['notFound'])) {
+    echo json_encode(["error" => $config->error->notFound]);
+}
