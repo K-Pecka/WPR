@@ -42,25 +42,46 @@ fileInput.addEventListener('change', function(event) {
 
 document.querySelector('#addRecipe').addEventListener('click',()=>{
   var formData = new FormData();
+  var file = document.querySelector('input[type="file"]').files[0];
+  if(file === undefined) file='';
   var title = document.querySelector('input[name="title"]').value;
   var description = document.querySelector('.addToAddDescription').innerHTML;
   var ingridents=[];
-  var tr = [...document.querySelectorAll('table.ingredients tr')];
+  var preparations=[];
+  var div = [...document.querySelectorAll('.ingredient .ingredient-row')];
   var li = [...document.querySelectorAll('ul.instruction li')];
-  console.log(tr);
-  for(i=0;i<tr.length;i++)
+  for(i=0;i<div.length;i++)
   {
-    var td = [...tr[i].querySelectorAll('td')];
+    var el = [...div[i].querySelectorAll('div')];
+    console.log(el);
     var ingredient = {};
-    ingredient.name = td[0].innerHTML;
-    ingredient.unite= td[1].querySelector('input').value;
-    ingredient.value = td[2].querySelector('select').value;
+    ingredient.name = el[0].querySelector('div span').innerHTML;
+    ingredient.unite= el[1].querySelector('div input').value;
+    ingredient.value = el[2].querySelector('div select').value;
     ingridents.push(ingredient);
+  }
+  for(i=0;i<li.length;i++)
+  {
+    var preparation = {
+      "description":li[i].querySelector('p').innerHTML,
+      "time":li[i].querySelector('span').innerHTML
+    }
+    preparations.push(preparation);
   }
 
   if(title == '' || description=='' || ingridents.length == 0)
   {
     console.log("blocked");
-  }  
-    console.log(title,description,ingridents);
+  }
+  data = 
+  {
+    "title":title,
+    "description":description,
+    "ingridents":ingridents,
+    "preparations":preparations,
+    "file":file
+  }
+  formData.append('data',JSON.stringify(data));
+  formData.append('file',file);
+  addRecipe(formData);
 });

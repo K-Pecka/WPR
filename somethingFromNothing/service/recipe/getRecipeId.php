@@ -1,5 +1,7 @@
 <?php
+require_once '../../module/photo.php';
 $config = json_decode(file_get_contents('../../config/config.json'));
+
 class Recipe
 {
     private $title;
@@ -7,12 +9,12 @@ class Recipe
     private $image;
     private $description;
     private $rating;
+    private $review;
     private $favorite;
     private $preparations;
-    private $ingridients;
-    private $review;
+    private $ingredients;
 
-    public function __construct($title, $time, $image, $description, $rating, $review, $favorite, $preparations, $ingridients)
+    public function __construct($title, $time, $image, $description, $rating, $review, $favorite, $preparations, $ingredients)
     {
         $this->title = $title;
         $this->time = $time;
@@ -22,19 +24,19 @@ class Recipe
         $this->review = $review;
         $this->favorite = $favorite;
         $this->preparations = $preparations;
-        $this->ingridients = $ingridients;
+        $this->ingredients = $ingredients;
     }
+
     public function getPreparations()
     {
-        $preparationsData = array();
-        foreach ($this->preparations as $preparation) {
-            $preparationsData[] = $preparation->get();
-        }
-        return $preparationsData;
+        return array_map(function ($preparation) {
+            return $preparation->get();
+        }, $this->preparations);
     }
+
     public function get()
     {
-        $data = array(
+        $data = [
             'title' => $this->title,
             'time' => $this->time,
             'image' => $this->image,
@@ -42,9 +44,9 @@ class Recipe
             'rating' => $this->rating,
             'review' => $this->review,
             'favorite' => $this->favorite,
-            'ingridients' => $this->ingridients,
+            'ingredients' => $this->ingredients,
             'preparations' => $this->getPreparations()
-        );
+        ];
 
         return json_encode($data);
     }
@@ -60,68 +62,94 @@ class Preparation
         $this->description = $description;
         $this->time = $time;
     }
+
     public function get()
     {
-        $data = array(
+        return [
             'description' => $this->description,
-            'time' => $this->time,
-        );
-
-        return $data;
+            'time' => $this->time
+        ];
     }
 }
 
-
 try {
-    $pdo = new PDO("mysql:host=" . $config->database->host . ";dbname=" . $config->database->db . ";port=" . $config->database->port . ";charset=utf8", $config->database->name, $config->database->pass);
+    $pdo = new PDO(
+        "mysql:host={$config->database->host};dbname={$config->database->db};port={$config->database->port};charset=utf8",
+        $config->database->name,
+        $config->database->pass
+    );
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $id = isset($_GET['id_recipe']) ? $_GET['id_recipe'] : 10;
-    $query =
-        'SELECT `name` as "title", `image`, SUBSTRING(`recipe`.`description`, 1, 1000) as "description", FLOOR(AVG(`rating`)) as "rating", COUNT(*) as "review", SUM(`time`) as "time"
-        FROM `recipe`
-        LEFT JOIN `rating` ON `recipe`.`id` = `rating`.`id_recipe`
-        LEFT JOIN `preparation` ON `recipe`.`id` = `preparation`.`id_recipe`
-        WHERE `recipe`.`id` = :id
-        GROUP BY `recipe`.`id`';
+    $id = $_GET['id_recipe'] ?? 10;
+
+    $query = '
+        SELECT r.`id`,r.`name` as "title", SUBSTRING(r.`description`, 1, 1000) as "description",
+               FLOOR(AVG(rt.`rating`)) as "rating", COUNT(rt.`rating`) as "review", SUM(p.`time`) as "time"
+        FROM `recipe` r
+        LEFT JOIN `rating` rt ON r.`id` = rt.`id_recipe`
+        LEFT JOIN `preparation` p ON r.`id` = p.`id_recipe`
+        WHERE r.`id` = :id
+        GROUP BY r.`id`
+    ';
 
     $statement = $pdo->prepare($query);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();
     $data = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $query = 'SELECT `name` FROM `ingredient_for_recipe` JOIN `ingredient` ON `ingredient_for_recipe`.`id_ingredient`=`ingredient`.`id` WHERE `id_recipe` = :id';
+    if (!$data) {
+        echo json_encode(['error' => 'Recipe not found']);
+        exit();
+    }
+
+    $query = '
+        SELECT i.`name`
+        FROM `ingredient_for_recipe` ir
+        JOIN `ingredient` i ON ir.`id_ingredient` = i.`id`
+        WHERE ir.`id_recipe` = :id
+    ';
+
     $statement = $pdo->prepare($query);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();
-    $ingridients = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $ingredients = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-    $query = 'SELECT `time`,`description` FROM `preparation` WHERE `preparation`.`id_recipe`=:id ORDER BY `no` ASC';
+    $query = '
+        SELECT p.`time`, p.`description`
+        FROM `preparation` p
+        WHERE p.`id_recipe` = :id
+        ORDER BY p.`no` ASC
+    ';
+
     $statement = $pdo->prepare($query);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();
     $preparations = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if (!$data) {
-        echo json_encode(['error' => 'Recipe not found']);
-        exit();
+    $preparationsArray = array_map(function ($preparation) {
+        return new Preparation($preparation['description'], $preparation['time']);
+    }, $preparations);
+
+    if (empty($preparationsArray)) {
+        $preparationsArray[] = new Preparation("Not found", 0);
     }
-    $preparationsArray = array();
-    $ingridientsArray = array();
-    foreach ($ingridients as $ingridient) {
-        $ingridientsArray[] = $ingridient['name'];
+
+    if (empty($ingredients)) {
+        $ingredients[] = "Not found";
     }
-    foreach ($preparations as $preparation) {
-        if (is_array($preparation) && isset($preparation['description']) && isset($preparation['time'])) {
-            $preparationsArray[] = new Preparation($preparation['description'], $preparation['time']);
-        }
-    }
-    if (empty($preparationsArray)) $preparationsArray[] = new Preparation("Not found", 0);
-    if (empty($ingridientsArray)) $ingridientsArray[] = "Not found";
-    $recipe = new Recipe($data['title'], $data['time'], $data['image'], $data['description'], $data['rating'], $data['review'], false, $preparationsArray, $ingridientsArray);
+    $recipe = new Recipe(
+        $data['title'],
+        $data['time'],
+        getPhoto('../../data/recipe.csv', $data['id'], 'random.jpg'),
+        $data['description'],
+        $data['rating'],
+        $data['review'],
+        false,
+        $preparationsArray,
+        $ingredients
+    );
 
     header('Content-Type: application/json');
-
     echo $recipe->get();
 } catch (PDOException $e) {
     echo json_encode(['error' => 'Database connection error: ' . $e->getMessage()]);

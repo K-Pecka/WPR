@@ -282,7 +282,22 @@ var displayRecipe = (el) => {
       console.log(error);
     });
   }
-
+  var addRecipe = (formData) =>
+  {
+    console.log(formData);
+    fetch("../service/recipe/addRecipe.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.text())
+    .then(json => {
+      console.log(json);
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+  }
 
 
 

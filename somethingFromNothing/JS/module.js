@@ -37,10 +37,25 @@ var openBtnIngridient = document.querySelector('#addIngridient');
 var modalIngridient = document.getElementById('modalIngredients');
 var closeBtnIngridient = document.getElementsByClassName('close')[1];
 var ingridient = document.querySelector('.addToAdd');
+var inputText="<input type='text' placeholder='wprowadz składnik'>";
+var input = modalIngridient.querySelector('.ingredients-grid');
+
+var checkInput = (e) =>{
+  console.log(e.target.value);
+
+  if(input.querySelector('input[type="text"]:last-child').value != '')
+  {
+    console.log(input.querySelector('input[type="text"]:last-child').value);
+    input.innerHTML+=inputText;
+    input.querySelector('input[type="text"]:last-child').addEventListener('input',(e)=>checkInput(e));
+  }
+};
 
 function openModalI() {
   setTimeout(function() {
     modalIngridient.style.display = 'block';
+      modalIngridient.querySelector('.ingredients-grid').innerHTML+=inputText;
+      modalIngridient.querySelector('.ingredients-grid input[type="text"]').addEventListener('input',(e)=>checkInput(e));
       document.querySelectorAll('input[type=checkbox]').forEach(el=>{
       el.addEventListener('change',setChecked);
       });
@@ -60,19 +75,19 @@ closeBtnIngridient.addEventListener('click', closeModalI);
 ingridient.addEventListener('click', () => {
   closeModalI();
   openBtnIngridient.innerHTML = "Edytuj składniki";
-  var input = [...modalIngridient.querySelectorAll('input')].filter(el=>el.checked);
+  var checkbox = [...modalIngridient.querySelectorAll('input[type="checkbox"]')].filter(el=>el.checked);
+  var input = [...modalIngridient.querySelectorAll('input[type="text"')].filter(el=>el.value != '');
+  var data = [...checkbox,...input];
   var html = "";
-  input.forEach(el=>html +=
-    `<div><span>`+el.dataset.name+`</span>
+  data.forEach(el=>html +=
+    `<div class="ingredient-row"><div><span>`+(el.dataset.name == true ? el.dataset.name : el.value)+`</span></div>
       <div><input name='unite'></div>
       <div>
         <select>
-          <option value='1'>KG</option>
-          <option value='2'>MIL</option>
         </select>
       </div>
     </div>`);
-  document.querySelector('.ingredients table').innerHTML = html;
+  document.querySelector('.ingredient').innerHTML = html;
 });
 
 var openBtnPreparation = document.querySelector('#addPreparation');
@@ -122,7 +137,6 @@ var checkEmpty = (e) => {
   {
     var li = document.createElement('li');
     li.innerHTML = '<span>Czas przygotowania: <input type="number" type="time">min</span><textarea placeholder="Podaj opis" class="content"></textarea>';
-    console.log(e.target.parentNode.parentNode);
     e.target.addEventListener('input',(e)=>checkEmpty(e));
     e.target.parentNode.parentNode.appendChild(li);
   }

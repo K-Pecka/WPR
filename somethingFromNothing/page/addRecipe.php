@@ -176,7 +176,7 @@ require_once '../module/setPage.php';
 			}
 
 
-			.ingredients input[name="value"] {
+			.ingredients input[name="unite"] {
 				width: 50px;
 				text-align: center;
 			}
@@ -258,54 +258,7 @@ require_once '../module/setPage.php';
 						<div class="ingredients">
 							<h3>Składniki:</h3>
 							<div class="ingredient">
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
-								<div class="ingredient-row">
-									<span>Makaron</span>
-									<div><input name="value"></div>
-									<div><Select>
-											<option>OK</option>
-										</Select>
-									</div>
-								</div>
+
 							</div>
 							<button id="addIngridient" class="open-modal-btn">dodaj składnik</button>
 						</div>
@@ -360,7 +313,7 @@ require_once '../module/setPage.php';
 		<div class="ingredient-box">
 			<label>
 			<div class="ingredient-tile">
-					<input type="checkbox" value="{{id}}" data-name={{name}}>
+					<input type="checkbox" value="{{name}}" data-name={{name}}>
 					{{name}} 
 			</div>
 			</label>

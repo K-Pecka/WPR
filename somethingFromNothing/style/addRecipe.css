@@ -84,14 +84,6 @@
 
 
 
-
-
-  .ingredients-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-  }
   
   .ingredient-tile {
     background-color: #f2f2f2;
