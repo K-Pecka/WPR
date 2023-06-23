@@ -14,6 +14,9 @@
     "addRecipePath":"../page/addRecipe.php",
     "headPath":"./somethingFromNothing/include/head.php"
   },
+  "message":{
+    "logOut":"pomyślnie wylogowany"
+  },
   "error":{
     "noData":{
       "h2":"Przepraszamy aktualnie nie posiadamy żadnego przepisu",

@@ -154,7 +154,7 @@
   }
   
   #login-button button {
-    background-color: #2ae249;
+    background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -200,16 +200,21 @@
   
   #login-content button {
     padding: 10px 20px;
-    background-color: #6dff33;
+    background-color: #4caf50;
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    line-height: 1em;
   }
   
   #login-content button:hover {
-    background-color: #35a72a;
+    background-color: #38813b;
+  }
+  #login-content button
+  {
+      width: 80%;
   }
   
 
@@ -379,7 +384,7 @@
   }
 
   .user-section {
-    display: block;
+    display: none;
     padding: 20px;
     background-color: #f5f5f5;
     margin-top: 20px;

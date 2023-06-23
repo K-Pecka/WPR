@@ -42,3 +42,15 @@ var commentForm = (id) =>
         addComment(formData);
     });
 }
+
+var sendUpdate = (e) =>
+{
+    e.preventDefault();
+    var form = e.target;
+    var formData = new FormData();
+    formData.append('nickName',form.querySelector('input[name="nickName"]').value);
+    formData.append('email',form.querySelector('input[name="email"]').value);
+    formData.append('pass',form.querySelector('input[name="pass"]').value);
+    formData.append('pass2',form.querySelector('input[name="pass2"]').value);
+    upadateData(formData);
+}

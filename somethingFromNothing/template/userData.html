@@ -1,0 +1,16 @@
+<h2>Edit data</h2>
+<form action="../service/user/updateDate.php" method="POST" id="updateData">
+    <label for="nickName">Nickname:</label>
+    <input type="text" name="nickName" id="nickName" value="{{nickName}}" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" value="{{email}}" required>
+    
+    <label for="pass">Password:</label>
+    <input type="password" name="pass" id="pass" required placeholder="******">
+    
+    <label for="pass2">Password:</label>
+    <input type="password" name="pass2" id="pass2" required placeholder="******">
+
+    <button type="submit">Save</button>
+  </form>

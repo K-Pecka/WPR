@@ -15,7 +15,6 @@ if(document.getElementById('menu-toggle'))
 }
 
 var menuCheckbox = document.getElementById('menu-checkbox');
-var banner = document.querySelector('#banner');
 
 
 
@@ -37,28 +36,22 @@ function showLoginPopup() {
     getLoginForm();
     setTimeout(
     ()=>{
-      document.getElementById("signup").addEventListener("click", function() {
-      var message = document.querySelector(".message");
-      message.style.transform = "translateX(100%)";
-
-      if (message.classList.contains("login")) {
-        message.classList.remove("login");
-      }
-
-      message.classList.add("signup");
-      });
-      
-      document.getElementById("login").addEventListener("click", function() {
+      document.getElementById("change").addEventListener("click", function() {
+        var buttonText = this.innerText;
         var message = document.querySelector(".message");
-        message.style.transform = "translateX(0)";
-
-        if (message.classList.contains("signup")) {
+      
+        if (buttonText === "Sign Up") {
+          this.innerText = "Login";
+          message.style.transform = "translateX(0)";
           message.classList.remove("signup");
+          message.classList.add("login");
+        } else {
+          this.innerText = "Sign Up";
+          message.style.transform = "translateX(100%)";
+          message.classList.remove("login");
+          message.classList.add("signup");
         }
-        
-        message.classList.add("login");
-      }
-    );
+      });
     document.querySelector('.closeLog').addEventListener('click',()=>{
       document.querySelector('#login-content .container').innerHTML = "";
       document.getElementById('login-popup').style.display = 'none';
@@ -79,9 +72,10 @@ function hideLoginPopup() {
   document.getElementById('login-popup').style.display = 'none';
 }
 
+  var banner = document.querySelector('#banner');
+  banner.addEventListener('click',displayIndex);
 
 
-banner.addEventListener('click',displayIndex);
 
 
 

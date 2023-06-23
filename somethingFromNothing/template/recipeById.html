@@ -17,15 +17,15 @@
         <div class="ingredients">
             <h3>Składniki:</h3>
             <ul class="ingredients">
-                {{#each ingridients}}
-                <li>{{this}}</li>
+                {{#each ingredients}}
+                <li>{{name}} {{value}} {{unit}}</li>
                 {{/each}}
             </ul>
         </div>
     </div>
     <div class="instructions">
             <h3>Instrukcje:</h3>
-            <ul class="ingredients">
+            <ul class="preparations">
                 {{#each preparations}}
                 <li>{{description}} - {{time}} minutes</li>
                 {{/each}}

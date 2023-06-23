@@ -1,17 +1,18 @@
 var getData = () => {
     var currentURL = window.location.href;
     var [currentURL, id] = currentURL.split('/').pop().split('?');
-    currentURL=currentURL.split('#').join('');
+    currentURL=currentURL.split('#')[0];
+    console.log(currentURL);
     switch (currentURL) {
       case '':
       case 'index.php':
-        getRecipes('');
+        getRecipes('','recipe.html','#recipes');
         break;
       case 'userRecipe.php':
-        getRecipes('status');
+        getRecipes('status','userRecipe.html','#UserRecipes',false);
         break;
       case 'favorite.php':
-        getRecipes('favorite');
+        getRecipes('favorite','recipe.html','#recipes');
         setTimeout(() => {
          setFavorite();
         }, 1000);
@@ -24,6 +25,10 @@ var getData = () => {
       case 'addRecipe.php':
         document.querySelector('#addIngridient').addEventListener('click', getIngredient);
         break;
+      case 'userPanel.php':
+        setUpdateData();
+        break;
+            
     }
   };
   

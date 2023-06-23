@@ -14,6 +14,9 @@
     "addRecipePath":"../page/addRecipe.php",
     "headPath":"./somethingFromNothing/include/head.php"
   },
+  "message":{
+    "logOut":"successfully logged out"
+  },
   "error":{
     "noData":{
       "h2":"Sorry, we currently don't have any recipe",

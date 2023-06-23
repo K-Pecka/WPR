@@ -103,28 +103,44 @@ try {
     }
 
     $query = '
-        SELECT i.`name`
+        SELECT i.`name`, u.`name` as "unit", ir.`value`
         FROM `ingredient_for_recipe` ir
         JOIN `ingredient` i ON ir.`id_ingredient` = i.`id`
+        JOIN `unite` u ON i.`unite` = u.`id`
         WHERE ir.`id_recipe` = :id
     ';
 
     $statement = $pdo->prepare($query);
     $statement->bindValue(':id', $id, PDO::PARAM_INT);
     $statement->execute();
-    $ingredients = $statement->fetchAll(PDO::FETCH_COLUMN);
+    $ingredients = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    $query = '
+    $ingredientsArray = array_map(function ($ingredient) {
+        return [
+            'name' => $ingredient['name'],
+            'unit' => $ingredient['unit'],
+            'value' => $ingredient['value']
+        ];
+    }, $ingredients);
+
+    if (empty($ingredientsArray)) {
+        $ingredientsArray[] = [
+            'name' => 'Not found',
+            'unit' => 'N/A',
+            'value' => 'N/A'
+        ];
+    }
+
+    $preparations = $pdo->prepare('
         SELECT p.`time`, p.`description`
         FROM `preparation` p
         WHERE p.`id_recipe` = :id
         ORDER BY p.`no` ASC
-    ';
+    ');
 
-    $statement = $pdo->prepare($query);
-    $statement->bindValue(':id', $id, PDO::PARAM_INT);
-    $statement->execute();
-    $preparations = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $preparations->bindValue(':id', $id, PDO::PARAM_INT);
+    $preparations->execute();
+    $preparations = $preparations->fetchAll(PDO::FETCH_ASSOC);
 
     $preparationsArray = array_map(function ($preparation) {
         return new Preparation($preparation['description'], $preparation['time']);
@@ -134,9 +150,6 @@ try {
         $preparationsArray[] = new Preparation("Not found", 0);
     }
 
-    if (empty($ingredients)) {
-        $ingredients[] = "Not found";
-    }
     $recipe = new Recipe(
         $data['title'],
         $data['time'],
@@ -146,7 +159,7 @@ try {
         $data['review'],
         false,
         $preparationsArray,
-        $ingredients
+        $ingredientsArray // Zaktualizowano zmienną na $ingredientsArray
     );
 
     header('Content-Type: application/json');

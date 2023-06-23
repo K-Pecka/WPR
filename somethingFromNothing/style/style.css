@@ -315,7 +315,10 @@ h2 {
   cursor: pointer;
   transform: scale(1.01);
 }
-
+#error-banner.sucessfullMess
+{
+  background-color: #4caf50;
+}
 
 
 

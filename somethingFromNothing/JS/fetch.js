@@ -26,9 +26,9 @@ var displayRecipe = (el) => {
       .then(response => response.text());
   }
   
-  var getRecipes = async (status) => {
+  var getRecipes = async (status,temp,element,follow=true) => {
     try {
-      var templateSource = await getTemp('recipe.html');
+      var templateSource = await getTemp(temp);
       var templateElement = parseHTML(templateSource);
       var response = await fetch('../service/recipe/getRecipes.php?'+status);
       var data = await response.json();
@@ -36,7 +36,7 @@ var displayRecipe = (el) => {
       {
         var response = await fetch('../service/config/error.php?noData=true');
         var data = await response.json();
-        document.querySelector("#recipes").innerHTML = 
+        document.querySelector(element).innerHTML = 
         `<div class='errorServer'>
         <h2>`+data.error.h2+`</h2>
         <p>`+data.error.p+`</p>
@@ -47,7 +47,7 @@ var displayRecipe = (el) => {
         
         var response = await fetch('../service/config/error.php?errorServer=true');
         var data = await response.json();
-        document.querySelector("#recipes").innerHTML = 
+        document.querySelector(element).innerHTML = 
         `<div class='errorServer'>
           <h2>`+data.error.h2+`</h2>
         </div>`;
@@ -56,6 +56,7 @@ var displayRecipe = (el) => {
       data.map((el) => {
         el.rating = '★'.repeat(el.rating).padEnd(5, '☆').split('');
         el.time = el.time === null ? 0 : el.time;
+        el.review=el.review == null ? 0:el.review ;
       });
   
       var template = Handlebars.compile(templateElement.innerHTML);
@@ -64,10 +65,14 @@ var displayRecipe = (el) => {
         html += template(recipe);
       });
       
-      document.querySelector("#recipes").innerHTML = html;
-      document.querySelectorAll('.recipe').forEach((el) => {
+      document.querySelector(element).innerHTML = html;
+      if( document.querySelector('.recipe') && follow)
+      {
+        document.querySelectorAll('.recipe').forEach((el) => {
         el.addEventListener('click', () => displayRecipe(el));
-      });
+        });
+      }
+      
     } catch (error) {
       console.error('Błąd pobierania danych:', error);
     }
@@ -100,7 +105,7 @@ var displayRecipe = (el) => {
         </div>`;
         return;
       }
-
+      console.log(data);
       data.rating = '★'.repeat(data.rating).padEnd(5, '☆').split('');
       var templateSource = await getTemp('recipeById.html');
       var templateElement = parseHTML(templateSource);
@@ -199,7 +204,7 @@ var displayRecipe = (el) => {
   var logOut = () =>
   {
     fetch("../service/user/logOut.php");
-    location.reload();
+    window.location.href='./';
   }
   var getRecipesComments = async (id) => {
     try {
@@ -289,9 +294,17 @@ var displayRecipe = (el) => {
       method: "POST",
       body: formData
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(json => {
-      console.log(json);
+      if(!document.querySelector('body #error-banner'))
+      {
+        document.querySelector('body').innerHTML+='<div id="error-banner"><span>'+json.message+'</span><div>';
+      }
+      if(json.status)document.querySelector('#error-banner').classList.toggle("sucessfullMess");
+      
+      document.querySelector('#error-banner').innerHTML='<span>'+json.message+'</span>';
+      respnsMess();
+      setTimeout(()=>window.location.href="./",5000);
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);
@@ -357,11 +370,9 @@ if(document.getElementById('cookie-accept'))
     }
   });
 }
-if(errorBanner = document.getElementById('error-banner'))
-{
-document.addEventListener('DOMContentLoaded', function() {
+var respnsMess = () =>{
   const errorBanner = document.getElementById('error-banner');
-
+  errorBanner.style.display = 'block';
   // Pokaż div i uruchom animację zjeżdżania
   errorBanner.classList.add('slide-in');
 
@@ -376,5 +387,45 @@ document.addEventListener('DOMContentLoaded', function() {
       errorBanner.style.display = 'none';
     }
   });
-});
+}
+if(errorBanner = document.getElementById('error-banner'))
+{
+document.addEventListener('DOMContentLoaded',respnsMess );
+}
+
+var setUpdateData=async ()=>{
+  try {
+    var templateSource = await getTemp("userData.html");
+    var templateElement = parseHTML(templateSource);
+    var response = await fetch('../service/user/getUserData.php');
+    var data = await response.json();
+
+    if (typeof Handlebars === 'undefined') {
+      document.querySelector("#recipe").innerHTML = "Błąd Servera 500";
+      return;
+    }
+    var templateElement = parseHTML(templateSource);
+    var updateData = Handlebars.compile(templateElement.innerHTML);
+    var updateDataContainer = document.getElementById("user-section-updateData");
+    updateDataContainer.innerHTML = updateData(data);
+    document.querySelector('#updateData').addEventListener('submit',(e)=>sendUpdate(e));
+  } catch (error) {
+    console.error('Błąd pobierania danych:', error);
+  }
+}
+var upadateData = (formData) =>
+{
+  console.log(formData);
+    fetch("../service/user/updateDate.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
 }

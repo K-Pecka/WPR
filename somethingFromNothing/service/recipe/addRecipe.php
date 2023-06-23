@@ -11,6 +11,7 @@ $pdo->beginTransaction();
 try {
     $fileName = "";
     if (!empty($_FILES['file']['name'])) {
+        require_once '../../module/photo.php';
         $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
         $fileName = $_SESSION['id'] . "_" . time() . "." . $fileExtension;
         $filePath = '../../image/public/recipe/' . $fileName;
@@ -18,6 +19,7 @@ try {
         if (!move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
             throw new Exception('Failed to upload the file.');
         }
+        addRecord("../../data/recipe.csv", date("Ymd"), $_SESSION['id'], $fileName);
     }
 
     $insertRecipeStatement = $pdo->prepare("INSERT INTO `recipe` (`name`, `description`, `id_user`, `status`) VALUES 
@@ -73,8 +75,8 @@ try {
     $pdo->commit();
 
     $response = [
-        'success' => true,
-        'message' => 'Recipe added successfully.'
+        'status' => true,
+        'message' => 'Recipe added successfully. zostaniesz przekierowany na stronę główną za 5s'
     ];
 } catch (Exception $e) {
     $pdo->rollBack();
