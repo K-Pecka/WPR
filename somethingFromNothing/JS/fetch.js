@@ -298,19 +298,17 @@ var displayRecipe = (el) => {
     .then(response => response.json())
     .then(json => {
       console.log(json);
+
       if(!document.querySelector('body #error-banner'))
       {
         document.querySelector('body').innerHTML+='<div id="error-banner"><span>'+json.message+'</span><div>';
       }
+      document.querySelector('#error-banner').innerHTML='<span>'+json.message+'</span>';
       if(json.status){
         document.querySelector('#error-banner').classList.toggle("sucessfullMess");
         setTimeout(()=>window.location.href="./",5000);
-      }
-      
-      document.querySelector('#error-banner').innerHTML='<span>'+json.message+'</span>';
+      } 
       respnsMess();
-
-      
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);

@@ -83,7 +83,7 @@ try {
     $pdo->rollBack();
 
     $response = [
-        'success' => false,
+        'status' => false,
         'message' => 'Error adding recipe: ' . $e->getMessage()
     ];
 }
