@@ -7,14 +7,16 @@ function getPhoto($path, $id, $default)
 
     foreach ($csvFile as $line) {
         $data = explode(';', $line);
-        if ($data[0] == $id) {
-            $lastPhotoName = $data[3];
+        if (isset($data[2])) {
+            if ($data[2] == $id) {
+                $lastPhotoName = $data[3];
+            }
         }
     }
 
     return $lastPhotoName;
 }
-function addRecord($csvFile, $data, $id_user, $photoName)
+function addRecord($csvFile, $date, $id_user, $photoName)
 {
     $lastRecord = [];
     $id = 1;
@@ -35,7 +37,7 @@ function addRecord($csvFile, $data, $id_user, $photoName)
         }
     }
 
-    $record = [$id, $data, $id_user, $photoName];
+    $record = [$id, $date, $id_user, $photoName];
     $file = fopen($csvFile, 'a');
     fputcsv($file, $record, ';');
     fwrite($file, "\n");

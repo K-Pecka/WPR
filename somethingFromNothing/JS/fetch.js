@@ -256,6 +256,7 @@ var displayRecipe = (el) => {
   }
   var getUser = (id) =>
   {
+    console.log(id);
     commentForm(id);
     fetch("../service/user/user.php")
     .then(response => response.json())
@@ -263,7 +264,7 @@ var displayRecipe = (el) => {
       if(!json.error)
       {
         console.log(json);
-        document.querySelector('.comment-author h4').innerHTML=json.user.nickName;
+        document.querySelector('.comment-author h4').innerHTML=json.nickName;
         document.querySelector('.comment-author img').src='../image/public/user/'+json.image;
       }
     })
@@ -296,15 +297,20 @@ var displayRecipe = (el) => {
     })
     .then(response => response.json())
     .then(json => {
+      console.log(json);
       if(!document.querySelector('body #error-banner'))
       {
         document.querySelector('body').innerHTML+='<div id="error-banner"><span>'+json.message+'</span><div>';
       }
-      if(json.status)document.querySelector('#error-banner').classList.toggle("sucessfullMess");
+      if(json.status){
+        document.querySelector('#error-banner').classList.toggle("sucessfullMess");
+        setTimeout(()=>window.location.href="./",5000);
+      }
       
       document.querySelector('#error-banner').innerHTML='<span>'+json.message+'</span>';
       respnsMess();
-      setTimeout(()=>window.location.href="./",5000);
+
+      
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);
@@ -423,6 +429,21 @@ var upadateData = (formData) =>
     .then(response => response.json())
     .then(json => {
       console.log(json);
+    })
+    .catch(error => {
+      console.error('Błąd pobierania danych:', error);
+      console.log(error);
+    });
+}
+var getUnite = () =>
+{
+  fetch("../service/recipe/getUnite.php")
+    .then(response => response.json())
+    .then(json => {
+      if(!json.error)
+      {
+        setIngrident(json);
+      }
     })
     .catch(error => {
       console.error('Błąd pobierania danych:', error);

@@ -17,7 +17,7 @@
   
   .modal-content {
     position: relative;
-
+    overflow-y: auto;
     background-color: #fff;
     width: 80%;
     max-width: 80%;
@@ -60,7 +60,7 @@
   }
   
   button:hover {
-    background-color: #0056b3;
+    background-color: #24a129;
   }
   
   /* Dodatkowe style dla animacji pojawiania się */

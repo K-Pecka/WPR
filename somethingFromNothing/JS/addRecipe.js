@@ -56,8 +56,8 @@ document.querySelector('#addRecipe').addEventListener('click',()=>{
     console.log(el);
     var ingredient = {};
     ingredient.name = el[0].querySelector('div span').innerHTML;
-    ingredient.unite= el[1].querySelector('div input').value;
-    ingredient.value = el[2].querySelector('div select').value;
+    ingredient.value= el[1].querySelector('div input').value;
+    ingredient.unite = el[2].querySelector('div select').value;
     ingridents.push(ingredient);
   }
   for(i=0;i<li.length;i++)

@@ -4,10 +4,15 @@
         <h2>{{title}}</h2>
     </div>
     <div>
-        <div class="stats">Review: {{review}}<br>Rating: {{rating}}</div>
-        <div>
+        <div class="stats">
+            <Rating:>Review: {{review}}<br>Rating: 
+                {{#each rating}}
+                <span>{{this}}</span>
+                {{/each}}
+            <div>
             <span>{{#if accepted}}Zweryfikowany{{else}}Nie zweryfikowany{{/if}}</span>
-        </div> 
+        </div>     
+        </div>
     </div>
     
 </div>

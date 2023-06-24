@@ -10,6 +10,14 @@ $pdo->beginTransaction();
 
 try {
     $fileName = "";
+    $insertRecipeStatement = $pdo->prepare("INSERT INTO `recipe` (`name`, `description`, `id_user`, `status`) VALUES 
+    (:title, :description, :user, 2)");
+    $insertRecipeStatement->bindValue(':title', $data->title, PDO::PARAM_STR);
+    $insertRecipeStatement->bindValue(':description', $data->description, PDO::PARAM_STR);
+    $insertRecipeStatement->bindValue(':user', $_SESSION['id'], PDO::PARAM_INT);
+    $insertRecipeStatement->execute();
+
+    $idRecipe = $pdo->lastInsertId();
     if (!empty($_FILES['file']['name'])) {
         require_once '../../module/photo.php';
         $fileExtension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -19,17 +27,10 @@ try {
         if (!move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
             throw new Exception('Failed to upload the file.');
         }
-        addRecord("../../data/recipe.csv", date("Ymd"), $_SESSION['id'], $fileName);
+        addRecord("../../data/recipe.csv", date("Ymd"), $idRecipe, $fileName);
     }
 
-    $insertRecipeStatement = $pdo->prepare("INSERT INTO `recipe` (`name`, `description`, `id_user`, `status`) VALUES 
-    (:title, :description, :user, 1)");
-    $insertRecipeStatement->bindValue(':title', $data->title, PDO::PARAM_STR);
-    $insertRecipeStatement->bindValue(':description', $data->description, PDO::PARAM_STR);
-    $insertRecipeStatement->bindValue(':user', $_SESSION['id'], PDO::PARAM_INT);
-    $insertRecipeStatement->execute();
 
-    $idRecipe = $pdo->lastInsertId();
 
     $insertIngredients = [];
     $existingIngredients = [];

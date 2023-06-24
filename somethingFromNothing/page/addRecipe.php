@@ -32,17 +32,17 @@ require_once '../module/setPage.php';
 				z-index: 10;
 				cursor: pointer;
 				padding: 10px 20px;
-				background-color: #337ab7;
+				background-color: #4caf50;
 				color: #fff;
 				border-radius: 5px;
 			}
 
 			.image label:hover {
-				background-color: #286090;
+				background-color: #24a129;
 			}
 
 			.image label:active {
-				background-color: #204d74;
+				background-color: #4caf50;
 			}
 
 			.image label:focus {
@@ -105,7 +105,7 @@ require_once '../module/setPage.php';
 
 			.image label {
 				display: block;
-				color: #666;
+				color: #eee;
 				font-size: 14px;
 				margin-bottom: 10px;
 				cursor: pointer;
@@ -142,7 +142,7 @@ require_once '../module/setPage.php';
 				text-align: justify;
 			}
 
-			.ingredient {
+			.ingredients-grid {
 				width: 100%;
 				margin-bottom: 5%;
 				display: grid;
@@ -211,11 +211,14 @@ require_once '../module/setPage.php';
 				padding: 10px 20px;
 				border-radius: 4px;
 				cursor: pointer;
-				margin-top: 10px;
 				align-self: flex-end;
 			}
 
 			.open-modal-btn {
+				margin-top: 10px;
+			}
+
+			#recipe .btn {
 				margin-top: 10px;
 			}
 
@@ -229,6 +232,23 @@ require_once '../module/setPage.php';
 				align-items: flex-start;
 				flex-wrap: wrap;
 				flex-direction: column;
+			}
+
+			body.dark-mode :is(input[name="title"], .description, .addToAddDescription) {
+				background-color: #666;
+				color: #eee;
+			}
+
+			.modal-btn {
+				position: absolute;
+				bottom: -10%;
+				right: 5%;
+			}
+
+			.ingredient-tile input {
+				background-color: transparent;
+				border: none;
+				color: black;
 			}
 		</style>
 	</head>
@@ -254,25 +274,22 @@ require_once '../module/setPage.php';
 						<div class="description" name="description">
 							<div class="addToAddDescription">Kliknij przycisk i dodaj opis</div>
 						</div>
-						<button class="open-modal-btn-description">Dodaj Opis</button>
+						<button class="open-modal-btn-description btn">Dodaj Opis</button>
 						<div class="ingredients">
 							<h3>Składniki:</h3>
 							<div class="ingredient">
 
 							</div>
-							<button id="addIngridient" class="open-modal-btn">dodaj składnik</button>
+							<button id="addIngridient" class="open-modal-btn btn">dodaj składnik</button>
 						</div>
 					</div>
 					<div class="instructions">
 						<h3>Instrukcje:</h3>
 						<ul class="instruction">
-							<li>
-								<p>Przygotuj</p><span>5 min</span>
-							</li>
 						</ul>
-						<button id="addPreparation" class="open-modal-btn-preparation">dodaj składnik</button>
+						<button id="addPreparation" class="open-modal-btn-preparation btn">dodaj kroki<br> przygotowania</button>
 					</div>
-					<button id="addRecipe">Dodaj Przepis</button>
+					<button id="addRecipe" class="btn">Dodaj Przepis</button>
 				</div>
 			</section>
 		</main>

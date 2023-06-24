@@ -1,5 +1,5 @@
 {
-  "title": "coś z niczego",
+  "title": "Coś z niczego",
   "mainIcon": "../image/icon/mainIcon.jpg",
   "database":{
     "host": "localhost",
@@ -11,8 +11,7 @@
   "path":{
     "index":"../",
     "display":"./recipe.php",
-    "addRecipePath":"../page/addRecipe.php",
-    "headPath":"./somethingFromNothing/include/head.php"
+    "addRecipePath":"../page/addRecipe.php"
   },
   "message":{
     "logOut":"pomyślnie wylogowany"
@@ -42,6 +41,34 @@
     "header": [
       "Daj się porwać w wir gotowania i odkryj, jak zamienić codzienne składniki z lodówki w wyjątkowe kulinaria. Zaskocz swoje podniebienie, eksperymentując z prostymi przepisami, które nie wymagają skomplikowanych technik ani długiego czasu gotowania. Nasze przepisy płyną prosto z społeczności osób, które cenią sobie łatwość i chcą się podzielić wyczarowanymi smakowitymi arcydziełami.","Zapomnij o skomplikowanych przepisach i długiej liście zakupów. Dzięki naszym wskazówkom i pomysłom na wykorzystanie dostępnych składników w Twojej lodówce, każdy posiłek stanie się niezwykłą ucztą. Od chwilowego zastrzyku energii w postaci pysznego smoothie po kremowe zupy, soczyste sałatki i wykwintne dania główne - wszystko to możesz zrobić z prostych składników, które już posiadasz."
     ],
+    "mainMenu":{
+      "li":[
+        {
+          "href":"userPanel.php",
+          "content":"Panel użytkownika"
+        },
+        {
+          "href":"favorite.php",
+          "content":"Ulubione"
+        },
+        {
+          "href":"userRecipe.php",
+          "content":"Twoje przepisy"
+        },
+        {
+          "href":"addRecipe.php",
+          "content":"Dodaj przepis"
+        },
+        {
+          "content":"{{SELCT LANG}}"  
+        },
+        {
+          "content":"Wyloguj",
+          "class":"LogOut"
+        }
+      ]
+        
+    },
     "search":{
       "placeholder":"Wciśnij Enter, aby odnaleźć przepis lub #, aby pokazać wszystkie przepisy",
       "button":{"title": "szukaj"}

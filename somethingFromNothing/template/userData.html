@@ -1,16 +1,16 @@
 <h2>Edit data</h2>
-<form action="../service/user/updateDate.php" method="POST" id="updateData">
+<form action="../service/user/updateDate.php" method="POST" id="updateData" autocomplete="off">
     <label for="nickName">Nickname:</label>
-    <input type="text" name="nickName" id="nickName" value="{{nickName}}" required>
+    <input type="text" name="nickName" id="nickName" value="{{nickName}}" required >
     
     <label for="email">Email:</label>
-    <input type="email" name="email" id="email" value="{{email}}" required>
+    <input type="email" name="email" id="email" value="{{email}}" required >
     
     <label for="pass">Password:</label>
-    <input type="password" name="pass" id="pass" required placeholder="******">
+    <input type="password" name="pass" id="pass" required placeholder="* * * * * *" autocomplete="new-password">
     
     <label for="pass2">Password:</label>
-    <input type="password" name="pass2" id="pass2" required placeholder="******">
+    <input type="password" name="pass2" id="pass2" required placeholder="* * * * * *" autocomplete="new-password">
 
     <button type="submit">Save</button>
   </form>

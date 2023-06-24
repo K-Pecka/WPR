@@ -9,7 +9,7 @@ require_once '../module/setPage.php';
     <?php echo $head; ?>
     <style>
       h2 {
-        color: #333;
+        color: red;
         font-size: 24px;
         margin-bottom: 20px;
       }

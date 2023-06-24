@@ -9,6 +9,13 @@
   --color-error-light:#443f3f;
   --color-error-dark:#b8b7b7;
 }
+main
+{
+  min-height: calc(100% + 50px);
+}
+html {
+  scroll-behavior: smooth;
+}
 .errorServer
 {
   height: 100%;
@@ -390,4 +397,9 @@ h2 {
 
 #error-banner.slide-out {
   top: -10%;
+}
+.stats
+{
+  display: flex;
+  flex-direction: column;
 }

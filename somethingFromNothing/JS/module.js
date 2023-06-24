@@ -2,14 +2,16 @@ var openBtnDescription = document.querySelector('.open-modal-btn-description');
 var modalDescription = document.getElementById('modal-description');
 var closeBtnDescription = document.getElementsByClassName('close')[0];
 var description = document.querySelector('.addToAdd-btn');
-
+var body = document.body.style;
 function openModal() {
+  body.overflowY="hidden";
   setTimeout(function() {
     modalDescription.style.display = 'block';
   }, 300);
 }
 
 function closeModal() {
+  body.overflowY="auto";
   setTimeout(function() {
     modalDescription.style.display = 'none';
   }, 300);
@@ -37,24 +39,39 @@ var openBtnIngridient = document.querySelector('#addIngridient');
 var modalIngridient = document.getElementById('modalIngredients');
 var closeBtnIngridient = document.getElementsByClassName('close')[1];
 var ingridient = document.querySelector('.addToAdd');
-var inputText="<input type='text' placeholder='wprowadz składnik'>";
+var inputText=`
+  <label>
+    <div class='ingredient-tile'>
+      <input type='text' placeholder='wprowadz składnik'>
+    </div>
+  </label>`;
 var input = modalIngridient.querySelector('.ingredients-grid');
 
 var checkInput = (e) =>{
   console.log(e.target.value);
-
-  if(input.querySelector('input[type="text"]:last-child').value != '')
+  if(e.target.value.trim()=='')
   {
-    console.log(input.querySelector('input[type="text"]:last-child').value);
-    input.innerHTML+=inputText;
-    input.querySelector('input[type="text"]:last-child').addEventListener('input',(e)=>checkInput(e));
+    if(list.length != 1)
+    {
+      e.target.parentNode.parentNode.parentNode.remove();
+    }
   }
+  if([...input.querySelectorAll('input[type="text"]')].pop().value != '')
+  {
+    var div = document.createElement('div');
+    div.classList.add('ingredient-box');
+    div.innerHTML=inputText;
+    div.addEventListener('input',(e)=>checkInput(e));
+    input.appendChild(div);
+  }
+
 };
 
 function openModalI() {
+  body.overflowY="hidden";
   setTimeout(function() {
     modalIngridient.style.display = 'block';
-      modalIngridient.querySelector('.ingredients-grid').innerHTML+=inputText;
+      modalIngridient.querySelector('.ingredients-grid').innerHTML+="<div class='ingredient-box'>"+inputText+"</div>";
       modalIngridient.querySelector('.ingredients-grid input[type="text"]').addEventListener('input',(e)=>checkInput(e));
       document.querySelectorAll('input[type=checkbox]').forEach(el=>{
       el.addEventListener('change',setChecked);
@@ -64,6 +81,7 @@ function openModalI() {
 }
 
 function closeModalI() {
+  body.overflowY="auto";
   setTimeout(function() {
     modalIngridient.style.display = 'none';
   }, 300);
@@ -72,23 +90,30 @@ function closeModalI() {
 openBtnIngridient.addEventListener('click', openModalI);
 closeBtnIngridient.addEventListener('click', closeModalI);
 
-ingridient.addEventListener('click', () => {
+ingridient.addEventListener('click', getUnite);
+var setIngrident =(getSection) => {
   closeModalI();
   openBtnIngridient.innerHTML = "Edytuj składniki";
-  var checkbox = [...modalIngridient.querySelectorAll('input[type="checkbox"]')].filter(el=>el.checked);
+  var checkbox = [...modalIngridient.querySelectorAll('input[type="checkbox"]')].filter(el=>el.checked==true);
   var input = [...modalIngridient.querySelectorAll('input[type="text"')].filter(el=>el.value != '');
   var data = [...checkbox,...input];
+  console.log(checkbox);
+  var section="";
+  getSection.forEach(el=>section+="<option value='"+el.id+"'>"+el.name+"</option>");
   var html = "";
-  data.forEach(el=>html +=
-    `<div class="ingredient-row"><div><span>`+(el.dataset.name == true ? el.dataset.name : el.value)+`</span></div>
+  data.forEach(el=>{
+    console.log(el.dataset.name);
+    html +=
+    `<div class="ingredient-row"><div><span>`+(el.dataset.name ? el.dataset.name : el.value)+`</span></div>
       <div><input name='unite'></div>
       <div>
         <select>
+          `+section+`
         </select>
       </div>
-    </div>`);
+    </div>`});
   document.querySelector('.ingredient').innerHTML = html;
-});
+};
 
 var openBtnPreparation = document.querySelector('#addPreparation');
 var modalPreparation = document.getElementById('modalPreparation');
@@ -96,12 +121,14 @@ var closeBtnPreparation = document.getElementsByClassName('close')[2];
 var preparation = document.querySelector('#modalPreparation .addToAdd-btn');
 
 function openModalP() {
+  body.overflowY="hidden";
   setTimeout(function() {
     modalPreparation.style.display = 'block';
   }, 300);
 }
 
 function closeModalP() {
+  body.overflowY="auto";
   setTimeout(function() {
     modalPreparation.style.display = 'none';
   }, 300);

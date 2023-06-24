@@ -38,6 +38,14 @@ require_once '../module/setPage.php';
             .recipe div:last-child {
                 min-width: 20%;
             }
+
+            .dark-mode h2 {
+                color: #eeeeee;
+            }
+
+            h2 {
+                color: #555555;
+            }
         </style>
     </head>
 

@@ -1,4 +1,5 @@
 <?php
+require_once '../module/photo.php';
 $nav =
   '<nav id="main-nav">
     <div id="banner">
@@ -23,50 +24,45 @@ $search = in_array($file, $arrayNotSearch) ? '' : '
 <ol id="menu-items">
 <li>
   <label for="nav-search"><img src="../image/icon/lupe.png" class="icon"></label>
-  <input type="text" placeholder="' . $HTML->search->placeholder . '" id="nav-search">
+  <input type="search" placeholder="' . $HTML->search->placeholder . '" id="nav-search">
   <button class="btn nav-search-btn">' . $HTML->search->button->title . '</button>
 </li>
 </ol>';
+$mainMenu = '';
+foreach ($HTML->mainMenu->li as $li) {
+  $mainMenu .= "<li>
+  <a " . (isset($li->href) ? "href='" . $li->href . "'" : "") . "" . (isset($li->class) ? "class='" . $li->class . "'" : "") . ">
+  " . $li->content . "</a>
+  </li>";
+}
+$mainMenu = str_replace("{{SELCT LANG}}", "
+<div class='lang-select'>
+  <select>
+    {{LANG}}
+  </select>
+</div>", $mainMenu);
 
 $userMenu = isset($_SESSION['id']) ?
-  '<img src="../image/public/user/random.jpg" alt="User Image" class="user-image user-menu userMenu">
+  '<img src="../image/public/user/' . getPhoto('../data/user.csv', $_SESSION['id'], 'random.jpg') . '" alt="User Image" class="user-image user-menu userMenu">
     <ul class="user-dropdown">
         <li>
         <div class="slider-container">
           <input type="checkbox" id="toggle" class="toggle-checkbox">
           <label for="toggle" class="toggle-label"></label>
         </div>
-        <div id="menu-toggle">
-          <input type="checkbox" id="menu-checkbox">
-          <label for="menu-checkbox">&#9776;</label>
-        </div>
         </li>
-        <li><a href="userPanel.php">Panel użytkownika</a></li>
-        <li><a href="favorite.php">Ulubione</a></li>
-        <li><a href="userRecipe.php">Twoje przepisy</a></li>
-        <li>
-          <a href=" ' . $config->path->addRecipePath . ' " target=_blank>
-            <img src="../image/icon/add.png" class="icon icon-min">Dodaj przepis
-          </a>
-        </li>
-        <li>
-          <div class="lang-select">
-            <select>
-              {{LANG}}
-            </select>
-          </div>
-        </li>
-        <li><a href="#" class="logOut">Wyloguj</a></li>
+        {{MAIN MENU}}
       </ul>' :
   '<div id="login-button">
     <button onclick="showLoginPopup()">' . $HTML->login . '</button>
   </div>';
+$userMenu = str_replace("{{MAIN MENU}}", $mainMenu, $userMenu);
 $pdo = new PDO("mysql:host=" . $config->database->host . ";dbname=" . $config->database->db . ";port=" . $config->database->port . ";charset=utf8", $config->database->name, $config->database->pass);
 $result = $pdo->query("SELECT `initials` as 'lang' FROM `lang`");
 $langDb = $result->fetchAll(PDO::FETCH_ASSOC);
 $lang = '';
 foreach ($langDb as $language) {
-  $lang .= "<option value='" . $language['lang'] . "'" . ($language['lang'] == isset($_COOKIE['lang']) && $_COOKIE['lang'] ? "selected" : "") . ">" . $language['lang'] . "</option>";
+  $lang .= "<option value='" . $language['lang'] . "'" . (isset($_COOKIE['lang']) && $language['lang'] == $_COOKIE['lang'] ? "selected" : "") . ">" . $language['lang'] . "</option>";
 }
 $userMenu  = str_replace("{{LANG}}", $lang, $userMenu);
 $nav = str_replace("{{SEARCH}}", $search, $nav);

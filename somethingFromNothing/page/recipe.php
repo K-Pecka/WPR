@@ -26,7 +26,7 @@ require_once '../module/setPage.php';
 					<h2>Comments</h2>
 					<form id="comment-form" method="POST">
 						<div class="comment-author">
-							<img class="comment-avatar" src="{{avatar}}" alt="User Avatar">
+							<img class="comment-avatar" src="{{USER}}" alt="User Avatar">
 							<h4></h4>
 						</div>
 						<textarea id="content" name="content" required></textarea>
